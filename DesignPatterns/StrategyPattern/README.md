@@ -1,5 +1,6 @@
 
 ## The Strategy Pattern
+### Refference : Headfirst Design Pattern
 
 The Strategy Pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable.
 
@@ -41,3 +42,8 @@ javac MiniDuckSimulator.java
 java MiniDuckSimulator
 
 ```
+
+## Overall Design
+
+
+![Strategy Design Pattern](./strategy.png)
