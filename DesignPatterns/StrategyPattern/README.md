@@ -44,6 +44,16 @@ java MiniDuckSimulator
 ```
 
 ## Overall Design
+How we can use this pattern in real world senarios.
+Think duck behaviours as a set of algorithms.
+As a example differnt way of quacking or in practical different way of tax in defferent states.
+The design pattern defines a family of algorithmes, encapsulates ech one, and make them interchangeable. Stragegy lets the algorithm vary independently from the clients that use it.
+
 
 
 ![Strategy Design Pattern](./strategy.png)
+
+## HAS-A can be better than IS-A
+
+The HAS-A relationship is an interesting one: each duck has a FlyBehavior and a QuackBehaviour to which it delegates flying and quacking.
+When you put two classes together like this you are useing composition. Instead of inheriting their behaviour, the ducks get their behaviour by being composed with the right behaviour object.
