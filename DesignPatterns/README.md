@@ -29,20 +29,29 @@ Fraemworks and libraries are not design patterns; they provide specific implemen
 ## Tools for your Design Tool box
 
 1. OO Basics
+
     Abstraction
+
     Encapsulation
+
     Polymorphism
+
     Inheritance
 
 2. OO Principles
+
     Encapsulate what varies.
+
     Favour composition over inheritance.
+
     Program to interface, not implemenation
 
 3.  OO Patterns
+
     Stratery - Design a family of algorithms
 
-
+    etc
+    
 ## Bullet points
 
 1. Good OO desingers are resusable, extensible and maintainable.
