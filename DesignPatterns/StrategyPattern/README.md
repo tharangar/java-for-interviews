@@ -60,3 +60,7 @@ When you put two classes together like this you are useing composition. Instead 
 
 This is a important technique; in fact.
 As you've seen, creating system using composition gives you a lot more flexibility. Not only does it let you encapsulate a family of algorithms into their own set of classes, but it also lets you change behaviour at runtime as long as the object you're composing with implements the correct behaviour interface.
+
+## Excersize
+
+![Strategy Design Pattern](./excersize.png)
