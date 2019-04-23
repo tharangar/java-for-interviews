@@ -30,4 +30,14 @@ javac MiniDuckSimulator.java
 
 java MiniDuckSimulator
 
+// Checking the dynamic behaviour of the behavior
+
+javac ModelDuck.java
+
+javac FlyRocketPowered.java 
+
+javac MiniDuckSimulator.java
+
+java MiniDuckSimulator
+
 ```

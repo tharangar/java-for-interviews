@@ -9,5 +9,27 @@ public class MiniDuckSimulator {
          */
         mallard.performQuack();
         mallard.performFly();
+
+ 
+        // Test the dynamic behavior allocation 
+       
+        Duck model = new ModelDuck();
+        /**
+         The first call to performeFly() delegates 
+         to the flyBehavior object set in the ModelDuck's constructor, which is a
+         FlyNoWay instance
+         */
+        model.performFly();
+
+        /**
+         This invokes the model's inherited behavior setter method, and
+         voila ! 
+         The model suddenly has rocket-powered flying capability.
+         */
+
+        model.setFlyBehavior(new FlyRocketPowered());
+
+        model.performFly();
+
     }
 }

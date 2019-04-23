@@ -9,7 +9,7 @@ public abstract class Duck {
     */ 
     FlyBehavior flyBehavior;
     QuackBehavior quackBehavior;
-    
+
     public Duck(){
 
     }
@@ -30,4 +30,18 @@ public abstract class Duck {
     public void swim(){
         System.out.println("All duucks float");
     }
+
+    /**
+     *
+     By setting setters we can change flyBehavior and quackBehavior dynamically
+     */
+    public void setFlyBehavior (FlyBehavior fb){
+        flyBehavior = fb;
+    }
+
+    public void setQuackBehavior(QuackBehavior qb){
+        quackBehavior = qb;
+    }
+
+
 }
