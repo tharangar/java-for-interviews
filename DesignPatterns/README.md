@@ -1,1 +1,56 @@
-[?1049h[1;33r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.0.6                            File: echo                                                                [31;54H[ New File ][32d^G(B[m Get Help[32;20H(B[0;7m^O(B[m WriteOut[32;39H(B[0;7m^R(B[m Read File[58G(B[0;7m^Y(B[m Prev Page[77G(B[0;7m^K(B[m Cut Text[32;96H(B[0;7m^C(B[m Cur Pos[33d(B[0;7m^X(B[m Exit[33;20H(B[0;7m^J(B[m Justify[33;39H(B[0;7m^W(B[m Where Is[33;58H(B[0;7m^V(B[m Next Page[77G(B[0;7m^U(B[m UnCut Text[96G(B[0;7m^T(B[m To Spell[3d[1;109H(B[0;7mModified[3d(B[mgit init[4dgit add README.md[5dgit commit -m "first commit"[6dgit remote add origin https://github.com/tharangar/java-for-interviews.git[31d[K[7dgit push -u origin master    [A[7da[K [8daca [9da7[9;31r8M[1;33r[10;1H[9;31r[9;1HM[1;33r[11;1H[9;31r[9;1HM[1;33r[12;1H[31;32H(B[0;7m[ line 10/11 (90%), col 1/2 (50%), char 156/158 (98%) ][12d(B[m[9;30r[9;1HM[1;33r[13;1H[9;30r[9;1HM[1;33r[14;1H[9;30r[9;1HM[1;33r[15;1H[33;1H[?1049l[?1l>
+
+# Design Patterns
+
+Design patterns are not just using Object Oritented concepts. OO concpets are underlined the design patterns . Design patterns are non-obvious, ways of constructing object-oriented systems have been collected.
+
+Design Patterns give you a shared vocabulary with other developpers.
+Once you've got the vocabulary you can more easily ocmmiunicate with other
+developpers and inspire those who don't know patterns to start learning them.
+It also elevates your thinking about architectures by letting you think at the pattern level, 
+not the nitty gritty object level.
+
+### Advantages of using desing patterns
+
+1. Shared pattern vocabularies are powerful.
+
+2. Patterns allow you to say more with less.
+
+3. Talking at the pattern level allows you to stay "in the design" longer.
+4. Shared vocabularies encourage more junior developers to get up to speed.
+
+## How do i use Design Patterns
+
+Design Pattersn first should be loaded in to your brain.
+Once you've loaded them to your brain with a good working knowledge of patterns, you can then start to apply them to your new design and rework your old code.
+
+Fraemworks and libraries are not design patterns; they provide specific implemenations that we link into our code. However, libraries and frameworks make use of design patterns in their implementaions.
+
+
+## Tools for your Design Tool box
+
+1. OO Basics
+    Abstraction
+    Encapsulation
+    Polymorphism
+    Inheritance
+
+2. OO Principles
+    Encapsulate what varies.
+    Favour composition over inheritance.
+    Program to interface, not implemenation
+
+3.  OO Patterns
+    Stratery - Design a family of algorithms
+
+
+## Bullet points
+
+1. Good OO desingers are resusable, extensible and maintainable.
+
+2. Patterns show how to build systms with good OO design qualities.
+
+3. Pattern don't give you code, they give you general solutions to design problems. You apply them to your specific applicaiton.
+
+4. Most patterns allow some part of a systme to vary independently of all other parts.
+
+5. Patterns provide a shared language that can maximize the value of your communication with other developers.
