@@ -57,3 +57,6 @@ The design pattern defines a family of algorithmes, encapsulates ech one, and ma
 
 The HAS-A relationship is an interesting one: each duck has a FlyBehavior and a QuackBehaviour to which it delegates flying and quacking.
 When you put two classes together like this you are useing composition. Instead of inheriting their behaviour, the ducks get their behaviour by being composed with the right behaviour object.
+
+This is a important technique; in fact.
+As you've seen, creating system using composition gives you a lot more flexibility. Not only does it let you encapsulate a family of algorithms into their own set of classes, but it also lets you change behaviour at runtime as long as the object you're composing with implements the correct behaviour interface.
