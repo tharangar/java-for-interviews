@@ -46,6 +46,8 @@ Fraemworks and libraries are not design patterns; they provide specific implemen
 
     Program to interface, not implemenation
 
+    Strive for loosely coupled designs between objects that interact.
+
 3.  OO Patterns
 
     Stratery - Design a family of algorithms
