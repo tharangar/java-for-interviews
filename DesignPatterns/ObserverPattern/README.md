@@ -54,3 +54,28 @@ Every display will have, say, an update() method that weatherData will call.
 
 
 ![Whether Display system Design](./whether.png)
+
+
+## Lets start coding
+
+```
+javac Subject.java 
+
+javac Observer.java
+
+javac DisplayElement.java
+
+javac WeatherData.java
+
+ javac CurrentConditionsDisplay.java
+
+ javac WeatherStation.java
+
+ java WeatherStation
+
+ Result :
+
+ Curent coditions : 80.0 F degree and  65.0 % humidity 
+Curent coditions : 78.0 F degree and  90.0 % humidity
+
+```
