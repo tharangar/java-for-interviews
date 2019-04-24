@@ -63,4 +63,4 @@ As you've seen, creating system using composition gives you a lot more flexibili
 
 ## Excersize
 
-![Strategy Design Pattern](./excersize.png)
+![Another Exersize for Strategy Design Pattern](./excersize.png)
