@@ -269,4 +269,90 @@ As you can see in the bellow figure, object gets the memory in heap memory area.
 
 ![Alt text](relative/path/to/img.jpg?raw=true "Title")
 ![Alt text](heap.png?raw=true "Heap and stack in memory")
-![memory heap and stack](https://github.com/tharangar/java-for-interviews/blob/master/OOP/Basic/heap.png)
+![memory heap and stack](https://absoluteurl/heap.png)
+
+
+### 3 Initialization through a constructor
+
+This part will be covered when we study the constructors.
+
+
+
+### Let's see an example where we are maintaining records of employees.
+
+```
+    class Employee{  
+        int id;  
+        String name;  
+        float salary;  
+        void insert(int i, String n, float s) {  
+            id=i;  
+            name=n;  
+            salary=s;  
+        }  
+        void display(){System.out.println(id+" "+name+" "+salary);}  
+    }  
+    public class TestEmployee {  
+    public static void main(String[] args) {  
+        Employee e1=new Employee();  
+        Employee e2=new Employee();  
+        Employee e3=new Employee();  
+        e1.insert(101,"ajeet",45000);  
+        e2.insert(102,"irfan",25000);  
+        e3.insert(103,"nakul",55000);  
+        e1.display();  
+        e2.display();  
+        e3.display();  
+    }  
+    }  
+```
+
+
+What are the different ways to create an object in Java?
+
+There are many ways to create an object in java. They are:
+
+*    By new keyword
+*    By newInstance() method
+*    By clone() method
+*    By deserialization
+*    By factory method etc.
+
+We will learn these ways to create object later.
+
+
+
+### Anonymous object
+
+
+Anonymous simply means nameless. An object which has no reference is known as an anonymous object. It can be used at the time of object creation only.
+
+If you have to use an object only once, an anonymous object is a good approach. For example:
+
+    new Calculation();//anonymous object  
+
+Calling method through a reference:
+
+    Calculation c=new Calculation();  
+    c.fact(5);  
+
+Calling method through an anonymous object
+
+    new Calculation().fact(5);  
+
+Let's see the full example of an anonymous object in Java.
+
+```
+    class Calculation{  
+     void fact(int  n){  
+      int fact=1;  
+      for(int i=1;i<=n;i++){  
+       fact=fact*i;  
+      }  
+     System.out.println("factorial is "+fact);  
+    }  
+    public static void main(String args[]){  
+     new Calculation().fact(5);//calling method with anonymous object  
+    }  
+    }  
+```
