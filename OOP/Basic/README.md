@@ -267,5 +267,6 @@ In this example, we are creating the two objects of Student class and initializi
 
 As you can see in the bellow figure, object gets the memory in heap memory area. The reference variable refers to the object allocated in the heap memory area. Here, s1 and s2 both are reference variables that refer to the objects allocated in memory.
 
-
-![memory heap and stack](https://github.com/tharangar/java-for-interviews/tree/master/OOP/Basic/heap.png)
+![Alt text](relative/path/to/img.jpg?raw=true "Title")
+![Alt text](heap.png?raw=true "Heap and stack in memory")
+![memory heap and stack](https://github.com/tharangar/java-for-interviews/blob/master/OOP/Basic/heap.png)
