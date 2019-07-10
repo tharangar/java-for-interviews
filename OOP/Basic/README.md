@@ -501,10 +501,119 @@ Constructor overloading in Java is a technique of having more than one construct
 There are many differences between constructors and methods. They are given below.
 
 
-#Java Constructor | #Java Methods |
+Java Constructor | Java Methods |
 --- | --- | 
 A constructor is used to initialize the state of an object. | A method is used to expose the behavior of an object. |
 A constructor must not have a return type. | A method must have a return type. |
 The constructor is invoked implicitly. | The method is invoked explicitly. |
 The Java compiler provides a default constructor if you don't have any constructor in a class. | The method is not provided by the compiler in any case. |
 The constructor name must be same as the class name. | The method name may or may not be same as the class name. |
+
+
+
+### Java Copy Constructor
+
+There is no copy constructor in Java. However, we can copy the values from one object to another like copy constructor in C++.
+
+There are many ways to copy the values of one object into another in Java. They are:
+
+    By constructor
+    By assigning the values of one object into another
+    By clone() method of Object class
+
+In this example, we are going to copy the values of one object into another using Java constructor.
+
+```
+    //Java program to initialize the values from one object to another object.  
+    class Student6{  
+        int id;  
+        String name;  
+        //constructor to initialize integer and string  
+        Student6(int i,String n){  
+        id = i;  
+        name = n;  
+        }  
+        //constructor to initialize another object  
+        Student6(Student6 s){  
+        id = s.id;  
+        name =s.name;  
+        }  
+        void display(){System.out.println(id+" "+name);}  
+       
+        public static void main(String args[]){  
+        Student6 s1 = new Student6(111,"Karan");  
+        Student6 s2 = new Student6(s1);  
+        s1.display();  
+        s2.display();  
+       }  
+    }  
+```
+
+
+Q) Does constructor return any value?
+
+Yes, it is the current class instance (You cannot use return type yet it returns a value).
+Can constructor perform other tasks instead of initialization?
+
+Yes, like object creation, starting a thread, calling a method, etc. You can perform any operation in the constructor as you perform in the method.
+Is there Constructor class in Java?
+
+Yes.
+What is the purpose of Constructor class?
+
+Java provides a Constructor class which can be used to get the internal information of a constructor in the class. It is found in the java.lang.reflect package.
+
+
+
+### Java static keyword
+
+The static keyword in Java is used for memory management mainly. We can apply java static keyword with variables, methods, blocks and nested class. The static keyword belongs to the class than an instance of the class.
+
+The static can be:
+
+1    Variable (also known as a class variable)
+2    Method (also known as a class method)
+3    Block
+4    Nested class
+
+
+1) Java static variable
+
+If you declare any variable as static, it is known as a static variable.
+
+    The static variable can be used to refer to the common property of all objects (which is not unique for each object), for example, the company name of employees, college name of students, etc.
+    The static variable gets memory only once in the class area at the time of class loading.
+
+
+One advantage of static variable is, it makes your program memory efficient (i.e., it saves memory).
+
+Suppose there are 500 students in my college, now all instance data members will get memory each time when the object is created. All students have its unique rollno and name, so instance data member is good in such case. Here, "college" refers to the common property of all objects. If we make it static, this field will get the memory only once.
+
+```
+/Java Program to demonstrate the use of static variable  
+class Student{  
+   int rollno;//instance variable  
+   String name;  
+   static String college ="ITS";//static variable  
+   //constructor  
+   Student(int r, String n){  
+   rollno = r;  
+   name = n;  
+   }  
+   //method to display the values  
+   void display (){System.out.println(rollno+" "+name+" "+college);}  
+}  
+//Test class to show the values of objects  
+public class TestStaticVariable1{  
+ public static void main(String args[]){  
+ Student s1 = new Student(111,"Karan");  
+ Student s2 = new Student(222,"Aryan");  
+ //we can change the college of all objects by the single line of code  
+ //Student.college="BBDIT";  
+ s1.display();  
+ s2.display();  
+ }  
+}  
+```
+
+![Alt text](static.png?raw=true "Static variables")
