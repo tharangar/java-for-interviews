@@ -356,3 +356,154 @@ Let's see the full example of an anonymous object in Java.
     }  
     }  
 ```
+
+
+### Creating multiple objects by one type only
+
+We can create multiple objects by one type only as we do in case of primitives.
+
+Initialization of primitive variables:
+
+        int a=10, b=20;  
+
+Initialization of refernce variables:
+
+        Rectangle r1=new Rectangle(), r2=new Rectangle();//creating two objects  
+
+
+### Constructors in Java
+
+In Java, a constructor is a block of codes similar to the method. 
+It is called when an instance of the class is created. At the time of calling constructor, memory for the object is allocated in the memory.
+
+It is a special type of method which is used to initialize the object.
+
+Every time an object is created using the new() keyword, at least one constructor is called.
+
+It calls a default constructor if there is no constructor available in the class. In such case, Java compiler provides a default constructor by default.
+
+There are two types of constructors in Java: no-arg constructor, and parameterized constructor.
+
+Note: It is called constructor because it constructs the values at the time of object creation. It is not necessary to write a constructor for a class. It is because java compiler creates a default constructor if your class doesn't have any.
+
+
+Rules for creating Java constructor
+
+There are two rules defined for the constructor.
+
+1    Constructor name must be the same as its class name
+2    A Constructor must have no explicit return type
+3    A Java constructor cannot be abstract, static, final, and synchronized
+
+Note: We can use access modifiers while declaring a constructor. It controls the object creation. In other words, we can have private, protected, public or default constructor in Java.
+
+Types of Java constructors
+
+There are two types of constructors in Java:
+
+    Default constructor (no-arg constructor)
+    Parameterized constructor
+
+
+### Java Default Constructor
+
+A constructor is called "Default Constructor" when it doesn't have any parameter. 
+
+In this example, we are creating the no-arg constructor in the Bike class. It will be invoked at the time of object creation. 
+
+```
+//Java Program to create and call a default constructor  
+class Bike1{  
+//creating a default constructor  
+Bike1(){System.out.println("Bike is created");}  
+//main method  
+public static void main(String args[]){  
+//calling a default constructor  
+Bike1 b=new Bike1();  
+}  
+} 
+```
+
+The default constructor is used to provide the default values to the object like 0, null, etc., depending on the type. 
+
+### Java Parameterized Constructor
+
+A constructor which has a specific number of parameters is called a parameterized constructor. 
+
+In this example, we have created the constructor of Student class that have two parameters. We can have any number of parameters in the constructor. 
+
+```
+    //Java Program to demonstrate the use of the parameterized constructor.  
+    class Student4{  
+        int id;  
+        String name;  
+        //creating a parameterized constructor  
+        Student4(int i,String n){  
+        id = i;  
+        name = n;  
+        }  
+        //method to display the values  
+        void display(){System.out.println(id+" "+name);}  
+       
+        public static void main(String args[]){  
+        //creating objects and passing values  
+        Student4 s1 = new Student4(111,"Karan");  
+        Student4 s2 = new Student4(222,"Aryan");  
+        //calling method to display the values of object  
+        s1.display();  
+        s2.display();  
+       }  
+    }  
+```
+
+### Constructor Overloading in Java
+
+In Java, a constructor is just like a method but without return type. It can also be overloaded like Java methods.
+
+Constructor overloading in Java is a technique of having more than one constructor with different parameter lists. They are arranged in a way that each constructor performs a different task. They are differentiated by the compiler by the number of parameters in the list and their types. 
+
+```
+    //Java program to overload constructors  
+    class Student5{  
+        int id;  
+        String name;  
+        int age;  
+        //creating two arg constructor  
+        Student5(int i,String n){  
+        id = i;  
+        name = n;  
+        }  
+        //creating three arg constructor  
+        Student5(int i,String n,int a){  
+        id = i;  
+        name = n;  
+        age=a;  
+        }  
+        void display(){System.out.println(id+" "+name+" "+age);}  
+       
+        public static void main(String args[]){  
+        Student5 s1 = new Student5(111,"Karan");  
+        Student5 s2 = new Student5(222,"Aryan",25);  
+        s1.display();  
+        s2.display();  
+       }  
+    }  
+```
+
+
+In Java, a constructor is just like a method but without return type. It can also be overloaded like Java methods.
+
+Constructor overloading in Java is a technique of having more than one constructor with different parameter lists. They are arranged in a way that each constructor performs a different task. They are differentiated by the compiler by the number of parameters in the list and their types. 
+
+
+### Difference between constructor and method in Java
+
+There are many differences between constructors and methods. They are given below.
+
+
+|Java Constructor | Java Methods |
+|A constructor is used to initialize the state of an object. | A method is used to expose the behavior of an object. |
+|A constructor must not have a return type. | A method must have a return type. |
+|The constructor is invoked implicitly. | The method is invoked explicitly. |
+|The Java compiler provides a default constructor if you don't have any constructor in a class. | The method is not provided by the compiler in any case. |
+|The constructor name must be same as the class name. | The method name may or may not be same as the class name. |
