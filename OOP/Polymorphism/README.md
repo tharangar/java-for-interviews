@@ -86,3 +86,32 @@ Yes, by method overloading. You can have any number of main methods in a class b
 Look at bellow example output is only from the one method.
 
 ![Main methods](mainmethods.png?raw=true "Main methods")
+
+### Method Overloading and Type Promotion
+
+One type is promoted to another implicitly if no matching datatype is found. Let's understand the concept by the figure given below:
+As displayed in the bellow diagram, byte can be promoted to short, int, long, float or double. The short datatype can be promoted to int,long,float or double. The char datatype can be promoted to int,long,float or double and so on.
+
+![Type Promotion](promotion.png?raw=true "Type Promotion")
+
+
+### Example of Method Overloading with TypePromotion
+
+```
+    class OverloadingCalculation1{  
+      void sum(int a,long b){System.out.println(a+b);}  
+      void sum(int a,int b,int c){System.out.println(a+b+c);}  
+      
+      public static void main(String args[]){  
+      OverloadingCalculation1 obj=new OverloadingCalculation1();  
+      obj.sum(20,20);//now second int literal will be promoted to long  
+      obj.sum(20,20,20);  
+      
+      }  
+    }  
+```
+
+
+### Example of Method Overloading with Type Promotion if matching found
+
+If there are matching type arguments in the method, type promotion is not performed.
