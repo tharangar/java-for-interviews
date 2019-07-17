@@ -587,3 +587,634 @@ Output:parent class constructor invoked
     }  
     }  
 ```
+output
+
+```
+Output:parent class constructor invoked
+       instance initializer block is invoked
+       child class constructor invoked
+       parent class constructor invoked
+       instance initializer block is invoked
+       child class constructor invoked 10
+```
+
+
+## Final Keyword In Java
+
+The final keyword in java is used to restrict the user. The java final keyword can be used in many context. Final can be:
+
+    variable
+    method
+    class
+
+The final keyword can be applied with the variables, a final variable that have no value it is called blank final variable or uninitialized final variable. It can be initialized in the constructor only. The blank final variable can be static also which will be initialized in the static block only. We will have detailed learning of these. Let's first learn the basics of final keyword. 
+
+### 1) Java final variable
+
+If you make any variable as final, you cannot change the value of final variable(It will be constant).
+
+#### Example of final variable
+
+There is a final variable speedlimit, we are going to change the value of this variable, but It can't be changed because final variable once assigned a value can never be changed. 
+```
+    class Bike9{  
+     final int speedlimit=90;//final variable  
+     void run(){  
+      speedlimit=400;  
+     }  
+     public static void main(String args[]){  
+     Bike9 obj=new  Bike9();  
+     obj.run();  
+     }  
+    }//end of class  
+```
+
+Output:Compile Time Error
+
+
+### 2) Java final method
+
+If you make any method as final, you cannot override it.
+
+```
+    class Bike{  
+      final void run(){System.out.println("running");}  
+    }  
+         
+    class Honda extends Bike{  
+       void run(){System.out.println("running safely with 100kmph");}  
+         
+       public static void main(String args[]){  
+       Honda honda= new Honda();  
+       honda.run();  
+       }  
+    }  
+```
+
+Output:Compile Time Error
+
+### 3) Java final class
+
+If you make any class as final, you cannot extend it.
+
+```
+    final class Bike{}  
+      
+    class Honda1 extends Bike{  
+      void run(){System.out.println("running safely with 100kmph");}  
+        
+      public static void main(String args[]){  
+      Honda1 honda= new Honda1();  
+      honda.run();  
+      }  
+    }  
+
+```
+
+
+Q) Is final method inherited?
+
+Ans) Yes, final method is inherited but you cannot override it. For Example: 
+
+```
+    class Bike{  
+      final void run(){System.out.println("running...");}  
+    }  
+    class Honda2 extends Bike{  
+       public static void main(String args[]){  
+        new Honda2().run();  
+       }  
+    }  
+```
+
+Output:running...
+
+#### Q) What is blank or uninitialized final variable?
+
+A final variable that is not initialized at the time of declaration is known as blank final variable.
+
+If you want to create a variable that is initialized at the time of creating object and once initialized may not be changed, it is useful. For example PAN CARD number of an employee.
+
+It can be initialized only in constructor.
+
+```
+class Student{  
+int id;  
+String name;  
+final String PAN_CARD_NUMBER;  
+...  
+} 
+
+```
+
+#### Que) Can we initialize blank final variable?
+
+Yes, but only in constructor. For example:
+```
+    class Bike10{  
+      final int speedlimit;//blank final variable  
+        
+      Bike10(){  
+      speedlimit=70;  
+      System.out.println(speedlimit);  
+      }  
+      
+      public static void main(String args[]){  
+        new Bike10();  
+     }  
+    }  
+```
+
+Output: 70
+
+### static blank final variable
+
+A static final variable that is not initialized at the time of declaration is known as static blank final variable. It can be initialized only in static block.
+
+```
+    class A{  
+      static final int data;//static blank final variable  
+      static{ data=50;}  
+      public static void main(String args[]){  
+        System.out.println(A.data);  
+     }  
+    }  
+
+```
+
+### Q) What is final parameter?
+
+If you declare any parameter as final, you cannot change the value of it.
+
+```
+    class Bike11{  
+      int cube(final int n){  
+       n=n+2;//can't be changed as n is final  
+       n*n*n;  
+      }  
+      public static void main(String args[]){  
+        Bike11 b=new Bike11();  
+        b.cube(5);  
+     }  
+    }  
+```
+
+Output: Compile Time Error
+
+
+### Q) Can we declare a constructor final?
+
+No, because constructor is never inherited.
+
+
+## Polymorphism in Java
+
+Polymorphism in Java is a concept by which we can perform a single action in different ways. Polymorphism is derived from 2 Greek words: poly and morphs. The word "poly" means many and "morphs" means forms. So polymorphism means many forms.
+
+There are two types of polymorphism in Java: compile-time polymorphism and runtime polymorphism. We can perform polymorphism in java by method overloading and method overriding.
+
+If you overload a static method in Java, it is the example of compile time polymorphism. Here, we will focus on runtime polymorphism in java.
+
+### Runtime Polymorphism in Java
+
+
+Runtime polymorphism or Dynamic Method Dispatch is a process in which a call to an overridden method is resolved at runtime rather than compile-time.
+
+In this process, an overridden method is called through the reference variable of a superclass. The determination of the method to be called is based on the object being referred to by the reference variable.
+
+Let's first understand the upcasting before Runtime Polymorphism.
+Upcasting
+
+If the reference variable of Parent class refers to the object of Child class, it is known as upcasting. For example:
+
+Ex :
+
+```
+    class A{}  
+    class B extends A{}  
+
+        A a=new B();//upcasting  
+
+```
+For upcasting, we can use the reference variable of class type or an interface type. For Example:
+
+```
+    interface I{}  
+    class A{}  
+    class B extends A implements I{}  
+```
+
+Here, the relationship of B class would be:
+
+```
+B IS-A A
+B IS-A I
+B IS-A Object
+```
+
+Since Object is the root class of all classes in Java, so we can write B IS-A Object.
+
+
+### Example of Java Runtime Polymorphism
+
+In this example, we are creating two classes Bike and Splendor. Splendor class extends Bike class and overrides its run() method. We are calling the run method by the reference variable of Parent class. Since it refers to the subclass object and subclass method overrides the Parent class method, the subclass method is invoked at runtime.
+
+Since method invocation is determined by the JVM not compiler, it is known as runtime polymorphism. 
+
+```
+    class Bike{  
+      void run(){System.out.println("running");}  
+    }  
+    class Splendor extends Bike{  
+      void run(){System.out.println("running safely with 60km");}  
+      
+      public static void main(String args[]){  
+        Bike b = new Splendor();//upcasting  
+        b.run();  
+      }  
+    }  
+
+```
+Output will be
+running safely with 60km.
+
+
+### Java Runtime Polymorphism Example: Bank
+
+Consider a scenario where Bank is a class that provides a method to get the rate of interest. However, the rate of interest may differ according to banks. For example, SBI, ICICI, and AXIS banks are providing 8.4%, 7.3%, and 9.7% rate of interest.
+Note: This example is also given in method overriding but there was no upcasting.
+
+![Run time polymorhisum](upcast.png?raw=true "Run time Polymorphism")
+
+```
+    class Bank{  
+    float getRateOfInterest(){return 0;}  
+    }  
+    class SBI extends Bank{  
+    float getRateOfInterest(){return 8.4f;}  
+    }  
+    class ICICI extends Bank{  
+    float getRateOfInterest(){return 7.3f;}  
+    }  
+    class AXIS extends Bank{  
+    float getRateOfInterest(){return 9.7f;}  
+    }  
+    class TestPolymorphism{  
+    public static void main(String args[]){  
+    Bank b;  
+    b=new SBI();  
+    System.out.println("SBI Rate of Interest: "+b.getRateOfInterest());  
+    b=new ICICI();  
+    System.out.println("ICICI Rate of Interest: "+b.getRateOfInterest());  
+    b=new AXIS();  
+    System.out.println("AXIS Rate of Interest: "+b.getRateOfInterest());  
+    }  
+    }  
+
+```
+output
+
+    SBI Rate of Interest: 8.4
+    ICICI Rate of Interest: 7.3
+    AXIS Rate of Interest: 9.7
+
+
+### Java Runtime Polymorphism with Data Member
+
+Data memeber behaves differently than methods, becouse methods are overridden but not Data Members.
+A method is overridden, not the data members, so runtime polymorphism can't be achieved by data members.
+
+In the example given below, both the classes have a data member speedlimit. We are accessing the data member by the reference variable of Parent class which refers to the subclass object. Since we are accessing the data member which is not overridden, hence it will access the data member of the Parent class always. 
+
+```
+    class Bike{  
+     int speedlimit=90;  
+    }  
+    class Honda3 extends Bike{  
+     int speedlimit=150;  
+      
+     public static void main(String args[]){  
+      Bike obj=new Honda3();  
+      System.out.println(obj.speedlimit);//90  
+    }  
+
+```
+
+output : 90
+
+### Java Runtime Polymorphism with Multilevel Inheritance
+
+Let's see the simple example of Runtime Polymorphism with multilevel inheritance.
+
+```
+    class Animal{  
+    void eat(){System.out.println("eating");}  
+    }  
+    class Dog extends Animal{  
+    void eat(){System.out.println("eating fruits");}  
+    }  
+    class BabyDog extends Dog{  
+    void eat(){System.out.println("drinking milk");}  
+    public static void main(String args[]){  
+    Animal a1,a2,a3;  
+    a1=new Animal();  
+    a2=new Dog();  
+    a3=new BabyDog();  
+    a1.eat();  
+    a2.eat();  
+    a3.eat();  
+    }  
+    }  
+
+```
+
+output
+```
+eating
+eating fruits
+drinking milk
+```
+
+if BabyDog is not overriding the eat() method, so eat() method of Dog class willbe invoked.
+
+```
+class Animal{
+void eat(){System.out.println("eating");}
+}
+
+class Dog extends Animal{
+void eat(){System.out.println("eating fruits");}
+}
+
+class BabyDog extends Dog{
+
+
+public static void main(String args[]){
+Animal a1,a2,a3;
+a1=new Animal();
+a2=new Dog();
+a3=new BabyDog();
+
+a1.eat();
+a2.eat();
+a3.eat();
+}
+}
+```
+
+output will be ;
+
+```
+eating
+eating fruits
+eating fruits
+```
+
+
+## Static Binding and Dynamic Binding
+
+Connecting a method call to the method body is known as binding.
+
+There are two types of binding
+
+    Static Binding (also known as Early Binding).
+    Dynamic Binding (also known as Late Binding).
+
+#### Static Binding
+
+When type of the object is determined at compiled time, it is known as static binding.
+
+#### Dynamic Binding
+
+When type of the object is determined at run-time, it is known as dynamic binding.
+
+
+### Understanding the type of instance
+
+1.  variables have a type
+
+Each variable has a type, it may be primitive and non-primitive
+
+    int data=30; 
+
+Here data variable is a type of int. 
+
+2.  References have a type
+
+```
+    class Dog{  
+     public static void main(String args[]){  
+      Dog d1;//Here d1 is a type of Dog  
+     }  
+    }  
+```
+3. Objects have a type
+
+An object is an instance of particular java class,but it is also an instance of its superclass.
+
+```
+    class Animal{}  
+      
+    class Dog extends Animal{  
+     public static void main(String args[]){  
+      Dog d1=new Dog();  
+     }  
+    }  
+```
+Here d1 is an instance of Dog class, but it is also an instance of Animal.
+
+
+### static binding
+
+When type of the object is determined at compiled time(by the compiler), it is known as static binding.
+
+If there is any private, final or static method in a class, there is static binding.
+
+### Example of static binding
+
+```
+    class Dog{  
+     private void eat(){System.out.println("dog is eating...");}  
+      
+     public static void main(String args[]){  
+      Dog d1=new Dog();  
+      d1.eat();  
+     }  
+    }  
+```
+
+
+### Dynamic binding
+
+When type of the object is determined at run-time, it is known as dynamic binding.
+
+```
+    class Animal{  
+     void eat(){System.out.println("animal is eating...");}  
+    }  
+      
+    class Dog extends Animal{  
+     void eat(){System.out.println("dog is eating...");}  
+      
+     public static void main(String args[]){  
+      Animal a=new Dog();  
+      a.eat();  
+     }  
+    }  
+```
+
+Output:dog is eating...
+
+In the above example object type cannot be determined by the compiler, because the instance of Dog is also an instance of Animal.So compiler doesn't know its type, only its base type.
+
+
+## Java instanceof
+
+The java instanceof operator is used to test whether the object is an instance of the specified type (class or subclass or interface).
+
+The instanceof in java is also known as type comparison operator because it compares the instance with type. It returns either true or false. If we apply the instanceof operator with any variable that has null value, it returns false.
+
+
+### Simple example of java instanceof
+
+Let's see the simple example of instance operator where it tests the current class.
+
+```
+    class Simple1{  
+     public static void main(String args[]){  
+     Simple1 s=new Simple1();  
+     System.out.println(s instanceof Simple1);//true  
+     }  
+    }  
+```
+
+output : true
+
+An object of subclass type is also a type of parent class. For example, if Dog extends Animal then object of Dog can be referred by either Dog or Animal class.
+
+```
+class Animal{}  
+class Dog1 extends Animal{//Dog inherits Animal  
+  
+ public static void main(String args[]){  
+ Dog1 d=new Dog1();  
+ System.out.println(d instanceof Animal);//true  
+ }  
+} 
+```
+
+output:true
+
+### instanceof in java with a variable that have null value
+
+If we apply instanceof operator with a variable that have null value, it returns false. Let's see the example given below where we apply instanceof operator with the variable that have null value.
+
+```
+    class Dog2{  
+     public static void main(String args[]){  
+      Dog2 d=null;  
+      System.out.println(d instanceof Dog2);//false  
+     }  
+    }  
+```
+
+output:false
+
+
+### Downcasting with java instanceof operator
+
+When Subclass type refers to the object of Parent class, it is known as downcasting. If we perform it directly, compiler gives Compilation error. If you perform it by typecasting, ClassCastException is thrown at runtime. But if we use instanceof operator, downcasting is possible.
+
+        Dog d=new Animal();//Compilation error  
+
+If we perform downcasting by typecasting, ClassCastException is thrown at runtime.
+
+        Dog d=(Dog)new Animal();  
+        //Compiles successfully but ClassCastException is thrown at runtime  
+
+
+### Possibility of downcasting with instanceof
+
+Let's see the example, where downcasting is possible by instanceof operator.
+
+```
+    class Animal { }  
+      
+    class Dog3 extends Animal {  
+      static void method(Animal a) {  
+        if(a instanceof Dog3){  
+           Dog3 d=(Dog3)a;//downcasting  
+           System.out.println("ok downcasting performed");  
+        }  
+      }  
+       
+      public static void main (String [] args) {  
+        Animal a=new Dog3();  
+        Dog3.method(a);  
+      }  
+        
+     }  
+```
+
+Output:ok downcasting performed
+
+### Downcasting without the use of java instanceof
+
+Downcasting can also be performed without the use of instanceof operator as displayed in the following example:
+
+```
+class Animal { }  
+class Dog4 extends Animal {  
+  static void method(Animal a) {  
+       Dog4 d=(Dog4)a;//downcasting  
+       System.out.println("ok downcasting performed");  
+  }  
+   public static void main (String [] args) {  
+    Animal a=new Dog4();  
+    Dog4.method(a);  
+  }  
+} 
+```
+
+Output:ok downcasting performed
+
+Let's take closer look at this, actual object that is referred by a, is an object of Dog class. So if we downcast it, it is fine. But what will happen if we write:
+
+### Understanding Real use of instanceof in java
+
+Let's see the real use of instanceof keyword by the example given below.
+
+```
+    interface Printable{}  
+    class A implements Printable{  
+    public void a(){System.out.println("a method");}  
+    }  
+    class B implements Printable{  
+    public void b(){System.out.println("b method");}  
+    }  
+      
+    class Call{  
+    void invoke(Printable p){//upcasting  
+    if(p instanceof A){  
+    A a=(A)p;//Downcasting   
+    a.a();  
+    }  
+    if(p instanceof B){  
+    B b=(B)p;//Downcasting   
+    b.b();  
+    }  
+      
+    }  
+    }//end of Call class  
+      
+    class Test4{  
+    public static void main(String args[]){  
+    Printable p=new B();  
+    Call c=new Call();  
+    c.invoke(p);  
+    }  
+    }  
+```
+
+Output: b method
+
