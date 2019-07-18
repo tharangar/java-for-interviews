@@ -36,3 +36,12 @@ Points to Remember
 ![Abstraction](abstraction.png?raw=true "Abstraction")
 
 
+### Example of abstract class
+
+        abstract class A{}  
+
+## Abstract Method in java
+
+A method which is declared as abstract and does not have implementation is known as an abstract method. 
+
+        abstract void printStatus();//no method body and abstract  
