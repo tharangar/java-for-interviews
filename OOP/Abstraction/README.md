@@ -40,8 +40,155 @@ Points to Remember
 
         abstract class A{}  
 
-## Abstract Method in java
+### Abstract Method in java
 
 A method which is declared as abstract and does not have implementation is known as an abstract method. 
 
-        abstract void printStatus();//no method body and abstract  
+    abstract void printStatus();//no method body and abstract  
+
+
+### Example of Abstract class that has an abstract method
+
+In this example, Bike is an abstract class that contains only one abstract method run. Its implementation is provided by the Honda class.
+
+```
+    abstract class Bike{  
+      abstract void run();  
+    }  
+    class Honda4 extends Bike{  
+    void run(){System.out.println("running safely");}  
+    public static void main(String args[]){  
+     Bike obj = new Honda4();  
+     obj.run();  
+    }  
+    }  
+```
+
+### Understanding the real scenario of Abstract class
+
+In this example, Shape is the abstract class, and its implementation is provided by the Rectangle and Circle classes.
+
+Mostly, we don't know about the implementation class (which is hidden to the end user), and an object of the implementation class is provided by the factory method.
+
+A factory method is a method that returns the instance of the class. We will learn about the factory method later.
+
+In this example, if you create the instance of Rectangle class, draw() method of Rectangle class will be invoked.
+
+
+TestAbstraction1.java
+```
+    abstract class Shape{  
+    abstract void draw();  
+    }  
+    //In real scenario, implementation is provided by others i.e. unknown by end user  
+    class Rectangle extends Shape{  
+    void draw(){System.out.println("drawing rectangle");}  
+    }  
+    class Circle1 extends Shape{  
+    void draw(){System.out.println("drawing circle");}  
+    }  
+    //In real scenario, method is called by programmer or user  
+    class TestAbstraction1{  
+    public static void main(String args[]){  
+    Shape s=new Circle1();//In a real scenario, object is provided through method, e.g., getShape() method  
+    s.draw();  
+    }  
+    }  
+```
+
+output : drawing circle
+
+
+### Abstract class having constructor, data member and methods
+
+An abstract class can have a data member, abstract method, method body (non-abstract method), constructor, and even main() method.
+
+File: TestAbstraction2.java
+
+```
+    //Example of an abstract class that has abstract and non-abstract methods  
+     abstract class Bike{  
+       Bike(){System.out.println("bike is created");}  
+       abstract void run();  
+       void changeGear(){System.out.println("gear changed");}  
+     }  
+    //Creating a Child class which inherits Abstract class  
+     class Honda extends Bike{  
+     void run(){System.out.println("running safely..");}  
+     }  
+    //Creating a Test class which calls abstract and non-abstract methods  
+     class TestAbstraction2{  
+     public static void main(String args[]){  
+      Bike obj = new Honda();  
+      obj.run();  
+      obj.changeGear();  
+     }  
+    }  
+```
+output
+
+       bike is created
+       running safely..
+       gear changed
+
+Rule: If there is an abstract method in a class, that class must be abstract. 
+Otherwise it will be  a compile error.
+
+Rule: If you are extending an abstract class that has an abstract method, you must either provide the implementation of the method or make this class abstract.
+
+### Another real scenario of abstract class
+
+The abstract class can also be used to provide some implementation of the interface. In such case, the end user may not be forced to override all the methods of the interface.
+
+Note: If you are beginner to java, learn interface first and skip this example.
+
+```
+    interface A{  
+    void a();  
+    void b();  
+    void c();  
+    void d();  
+    }  
+      
+    abstract class B implements A{  
+    public void c(){System.out.println("I am c");}  
+    }  
+      
+    class M extends B{  
+    public void a(){System.out.println("I am a");}  
+    public void b(){System.out.println("I am b");}  
+    public void d(){System.out.println("I am d");}  
+    }  
+      
+    class Test5{  
+    public static void main(String args[]){  
+    A a=new M();  
+    a.a();  
+    a.b();  
+    a.c();  
+    a.d();  
+    }}  
+```
+
+Output:I am a
+       I am b
+       I am c
+       I am d
+
+
+## Interface in java
+
+
+An interface in java is a blueprint of a class. It has static constants and abstract methods.
+
+The interface in Java is a mechanism to achieve abstraction. There can be only abstract methods in the Java interface, not method body. It is used to achieve abstraction and multiple inheritance in Java.
+
+In other words, you can say that interfaces can have abstract methods and variables. It cannot have a method body.
+
+Java Interface also represents the IS-A relationship.
+
+It cannot be instantiated just like the abstract class.
+
+Since Java 8, we can have default and static methods in an interface.
+
+Since Java 9, we can have private methods in an interface.
