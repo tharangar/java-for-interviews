@@ -277,3 +277,191 @@ There are four types of Java access modifiers:
     Public: The access level of a public modifier is everywhere. It can be accessed from within the class, outside the class, within the package and outside the package.
 
 There are many non-access modifiers, such as static, abstract, synchronized, native, volatile, transient, etc. Here, we are going to learn the access modifiers only.
+
+
+
+### 1) Private
+
+The private access modifier is accessible only within the class.
+
+#### Simple example of private access modifier
+
+In this example, we have created two classes A and Simple. A class contains private data member and private method. We are accessing these private members from outside the class, so there is a compile-time error.
+
+```
+    class A{  
+    private int data=40;  
+    private void msg(){System.out.println("Hello java");}  
+    }  
+      
+    public class Simple{  
+     public static void main(String args[]){  
+       A obj=new A();  
+       System.out.println(obj.data);//Compile Time Error  
+       obj.msg();//Compile Time Error  
+       }  
+    }  
+```
+
+### Role of Private Constructor
+
+If you make any class constructor private, you cannot create the instance of that class from outside the class. For example:
+
+```
+class A{  
+private A(){}//private constructor  
+void msg(){System.out.println("Hello java");}  
+}  
+public class Simple{  
+ public static void main(String args[]){  
+   A obj=new A();//Compile Time Error  
+ }  
+} 
+```
+
+Note: A class cannot be private or protected except nested class.
+
+
+### 2) Default
+
+If you don't use any modifier, it is treated as default by default. The default modifier is accessible only within package. It cannot be accessed from outside the package. It provides more accessibility than private. But, it is more restrictive than protected, and public.
+
+Example of default access modifier
+
+In this example, we have created two packages pack and mypack. We are accessing the A class from outside its package, since A class is not public, so it cannot be accessed from outside the package.
+
+```
+    //save by A.java  
+    package pack;  
+    class A{  
+      void msg(){System.out.println("Hello");}  
+    }  
+```
+Access
+```
+    //save by B.java  
+    package mypack;  
+    import pack.*;  
+    class B{  
+      public static void main(String args[]){  
+       A obj = new A();//Compile Time Error  
+       obj.msg();//Compile Time Error  
+      }  
+    }  
+
+```
+In the above example, the scope of class A and its method msg() is default so it cannot be accessed from outside the package.
+
+
+
+### 3) Protected
+
+The protected access modifier is accessible within package and outside the package but through inheritance only.
+
+The protected access modifier can be applied on the data member, method and constructor. It can't be applied on the class.
+
+It provides more accessibility than the default modifer.
+
+### Example of protected access modifier
+
+In this example, we have created the two packages pack and mypack. The A class of pack package is public, so can be accessed from outside the package. But msg method of this package is declared as protected, so it can be accessed from outside the class only through inheritance.
+
+```
+    //save by A.java  
+    package pack;  
+    public class A{  
+    protected void msg(){System.out.println("Hello");}  
+    }  
+```
+
+accessed by
+
+```
+//save by B.java  
+package mypack;  
+import pack.*;  
+  
+class B extends A{  
+  public static void main(String args[]){  
+   B obj = new B();  
+   obj.msg();  
+  }  
+} 
+```
+
+output:Hello
+
+### 4) Public
+
+The public access modifier is accessible everywhere. It has the widest scope among all other modifiers.
+
+Example of public access modifier
+
+```
+    //save by A.java  
+      
+    package pack;  
+    public class A{  
+    public void msg(){System.out.println("Hello");}  
+    }  
+
+```
+Accessed by
+
+```
+    //save by B.java  
+      
+    package mypack;  
+    import pack.*;  
+      
+    class B{  
+      public static void main(String args[]){  
+       A obj = new A();  
+       obj.msg();  
+      }  
+    }  
+```
+
+output:hello
+
+### Java Access Modifiers with Method Overriding
+
+If you are overriding any method, overridden method (i.e. declared in subclass) must not be more restrictive.
+
+```
+    class A{  
+    protected void msg(){System.out.println("Hello java");}  
+    }  
+      
+    public class Simple extends A{  
+    void msg(){System.out.println("Hello java");}//C.T.Error  
+     public static void main(String args[]){  
+       Simple obj=new Simple();  
+       obj.msg();  
+       }  
+    }  
+```
+
+
+The default modifier is more restrictive than protected. That is why, there is a compile-time error.
+
+
+## Encapsulation in Java
+
+Encapsulation in Java is a process of wrapping code and data together into a single unit, for example, a capsule which is mixed of several medicines.
+encapsulation in java
+
+We can create a fully encapsulated class in Java by making all the data members of the class private. Now we can use setter and getter methods to set and get the data in it.
+
+The Java Bean class is the example of a fully encapsulated class.
+Advantage of Encapsulation in Java
+
+By providing only a setter or getter method, you can make the class read-only or write-only. In other words, you can skip the getter or setter methods.
+
+It provides you the control over the data. Suppose you want to set the value of id which should be greater than 100 only, you can write the logic inside the setter method. You can write the logic not to store the negative numbers in the setter methods.
+
+It is a way to achieve data hiding in Java because other class will not be able to access the data through the private data members.
+
+The encapsulate class is easy to test. So, it is better for unit testing.
+
+The standard IDE's are providing the facility to generate the getters and setters. So, it is easy and fast to create an encapsulated class in Java.
