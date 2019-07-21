@@ -155,3 +155,11 @@ The java.lang.Math class contains various methods for performing basic numeric o
 | Math.decrementExact() 	| It is used to return the argument decremented by one, throwing an exception if the result overflows an int or long. |
 | Math.negateExact() 	| It is used to return the negation of the argument, throwing an exception if the result overflows an int or long. |
 | Math.toIntExact() 	| It returns the value of the long argument, throwing an exception if the value overflows an int. |
+
+
+
+
+### More methods can be found from the javapoint.
+
+https://www.javatpoint.com/java-math
+
