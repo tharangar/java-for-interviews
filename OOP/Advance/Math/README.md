@@ -127,6 +127,7 @@ The java.lang.Math class contains various methods for performing basic numeric o
 
 
 | Method 	| Description |
+| ------------- | ------------- |
 | Math.abs() 	| It will return the Absolute value of the given value. |
 | Math.max() 	| It returns the Largest of two values. |
 | Math.min() 	| It is used to return the Smallest of two values. |
