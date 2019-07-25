@@ -890,12 +890,147 @@ In this example, we have created a final class named Employee. It have one final
 
 ### The above class is immutable because: ******
 
-    The instance variable of the class is final i.e. we cannot change the value of it after creating an object.
-    The class is final so we cannot create the subclass.
-    There is no setter methods i.e. we have no option to change the value of the instance variable.
+ 1.   The instance variable of the class is final i.e. we cannot change the value of it after creating an object.
+    
+ 2.   The class is final so we cannot create the subclass.
+    
+ 3.   There is no setter methods i.e. we have no option to change the value of the instance variable.
 
 These points makes this class as immutable.
 
 
 ## Java toString() method 
+
+If you want to represent any object as a string, toString() method comes into existence.
+
+The toString() method returns the string representation of the object.
+
+If you print any object, java compiler internally invokes the toString() method on the object. So overriding the toString() method, returns the desired output, it can be the state of an object etc. depends on your implementation.
+
+### Advantage of Java toString() method
+
+By overriding the toString() method of the Object class, we can return values of the object, so we don't need to write much code.
+
+
+### Understanding problem without toString() method
+
+Let's see the simple code that prints reference.
+
+```
+    class Student{  
+     int rollno;  
+     String name;  
+     String city;  
+      
+     Student(int rollno, String name, String city){  
+     this.rollno=rollno;  
+     this.name=name;  
+     this.city=city;  
+     }  
+      
+     public static void main(String args[]){  
+       Student s1=new Student(101,"Raj","lucknow");  
+       Student s2=new Student(102,"Vijay","ghaziabad");  
+         
+       System.out.println(s1);//compiler writes here s1.toString()  
+       System.out.println(s2);//compiler writes here s2.toString()  
+     }  
+    }  
+```
+
+
+Sample output :
+
+Output:Student@1fee6fc
+       Student@1eed786
+
+As you can see in the above example, printing s1 and s2 prints the hashcode values of the objects but I want to print the values of these objects. Since java compiler internally calls toString() method, overriding this method will return the specified values. Let's understand it with the example given below:
+
+
+### Example of Java toString() method
+
+Now let's see the real example of toString() method.
+
+```
+    class Student{  
+     int rollno;  
+     String name;  
+     String city;  
+      
+     Student(int rollno, String name, String city){  
+     this.rollno=rollno;  
+     this.name=name;  
+     this.city=city;  
+     }  
+       
+     public String toString(){//overriding the toString() method  
+      return rollno+" "+name+" "+city;  
+     }  
+     public static void main(String args[]){  
+       Student s1=new Student(101,"Raj","lucknow");  
+       Student s2=new Student(102,"Vijay","ghaziabad");  
+         
+       System.out.println(s1);//compiler writes here s1.toString()  
+       System.out.println(s2);//compiler writes here s2.toString()  
+     }  
+    }  
+```
+Output:101 Raj lucknow
+       102 Vijay ghaziabad
+
+
+## StringTokenizer in Java
+
+The java.util.StringTokenizer class allows you to break a string into tokens. It is simple way to break string.
+
+It doesn't provide the facility to differentiate numbers, quoted strings, identifiers etc. like StreamTokenizer class. We will discuss about the StreamTokenizer class in I/O chapter.
+Constructors of StringTokenizer class
+
+There are 3 constructors defined in the StringTokenizer class.
+
+| Constructor	| Description |
+| ------------- | ------------- | 
+| StringTokenizer(String str)	| creates StringTokenizer with specified string. |
+| StringTokenizer(String str, String delim)	| creates StringTokenizer with specified string and delimeter. |
+| StringTokenizer(String str, String delim, boolean returnValue)	|creates StringTokenizer with specified string, delimeter and returnValue. If return value is true, delimiter characters are considered to be tokens. If it is false, delimiter characters serve to separate tokens. |
+
+
+### Methods of StringTokenizer class
+
+The 6 useful methods of StringTokenizer class are as follows:
+
+| Public method	| Description |
+| ------------- | ------------- | 
+| boolean hasMoreTokens()	| checks if there is more tokens available. |
+| String nextToken()	| returns the next token from the StringTokenizer object. |
+| String nextToken(String delim)	| returns the next token based on the delimeter. |
+| boolean hasMoreElements()	| same as hasMoreTokens() method. |
+| Object nextElement()	| same as nextToken() but its return type is Object. |
+| int countTokens()	| returns the total number of tokens. |
+
+
+### Example of nextToken(String delim) method of StringTokenizer class
+
+```
+    import java.util.*;  
+      
+    public class Test {  
+       public static void main(String[] args) {  
+           StringTokenizer st = new StringTokenizer("my,name,is,khan");  
+            
+          // printing next token  
+          System.out.println("Next token is : " + st.nextToken(","));  
+       }      
+    }  
+```
+
+Output:Next token is : my
+
+StringTokenizer class is deprecated now. It is recommended to use split() method of String class or regex (Regular Expression).
+
+
+
+## Java String FAQs or Interview Questions
+
+
 
