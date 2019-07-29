@@ -13,11 +13,11 @@ Java Multithreading is mostly used in games, animation, etc.
 
 ### Advantages of Java Multithreading
 
-1) It doesn't block the user because threads are independent and you can perform multiple operations at the same time.
+1. It doesn't block the user because threads are independent and you can perform multiple operations at the same time.
 
-2) You can perform many operations together, so it saves time.
+2. You can perform many operations together, so it saves time.
 
-3) Threads are independent, so it doesn't affect other threads if an exception occurs in a single thread.
+3. Threads are independent, so it doesn't affect other threads if an exception occurs in a single thread.
 
 ### Multitasking
 
@@ -155,13 +155,13 @@ Thread class provide constructors and methods to create and perform operations o
 
 Commonly used Constructors of Thread class:
 
-    Thread()
+1.    Thread()
     
-    Thread(String name)
+2.    Thread(String name)
 
-    Thread(Runnable r)
+3.    Thread(Runnable r)
 
-    Thread(Runnable r,String name)
+4.    Thread(Runnable r,String name)
 
 ### Commonly used methods of Thread class:
 
@@ -287,9 +287,9 @@ The sleep() method of Thread class is used to sleep a thread for the specified a
 
 The Thread class provides two methods for sleeping a thread:
 
-    public static void sleep(long miliseconds)throws InterruptedException
+ 1.   public static void sleep(long miliseconds)throws InterruptedException
 
-    public static void sleep(long miliseconds, int nanos)throws InterruptedException
+ 2.   public static void sleep(long miliseconds, int nanos)throws InterruptedException
 
 ### Example of sleep method in java
 
@@ -312,7 +312,7 @@ The Thread class provides two methods for sleeping a thread:
 
 
 ```
-
+```
 output :
        1
        1
@@ -322,6 +322,7 @@ output :
        3
        4
        4
+```
 
 As you know well that at a time only one thread is executed. If you sleep a thread for the specified time,the thread shedular picks up another thread and so on. 
 
@@ -397,7 +398,7 @@ Method will run in the main tread. It has not initiated another thread.
     }  
 
 ```
-
+```
 output : 
 Output:1
        2
@@ -409,7 +410,7 @@ Output:1
        3
        4
        5
-
+```
 
 As you can see in the above program that there is no context-switching because here t1 and t2 will be treated as normal object not thread object. 
 
@@ -452,7 +453,7 @@ The join() method waits for a thread to die. In other words, it causes the curre
 
 
 As you can see in the above example,when t1 completes its task then t2 and t3 starts executing.
-
+```
 Output:1
        2
        3
@@ -468,6 +469,7 @@ Output:1
        4
        5
        5
+```
 
 ### Example of join(long miliseconds) method
 
@@ -498,6 +500,7 @@ Output:1
 ```
 
 output
+```
 Output:1
        2
        3
@@ -513,7 +516,7 @@ Output:1
        4
        5
        5
-
+```
 
 
 In the above example,when t1 is completes its task for 1500 miliseconds(3 times) then t2 and t3 starts executing.
