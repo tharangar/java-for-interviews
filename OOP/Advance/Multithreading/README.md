@@ -521,3 +521,340 @@ Output:1
 
 In the above example,when t1 is completes its task for 1500 miliseconds(3 times) then t2 and t3 starts executing.
 
+
+### getName(),setName(String) and getId() method:
+
+1.  public String getName()
+2.  public void setName(String name)
+3.  public long getId()
+
+```
+    class TestJoinMethod3 extends Thread{  
+      public void run(){  
+       System.out.println("running...");  
+      }  
+     public static void main(String args[]){  
+      TestJoinMethod3 t1=new TestJoinMethod3();  
+      TestJoinMethod3 t2=new TestJoinMethod3();  
+      System.out.println("Name of t1:"+t1.getName());  
+      System.out.println("Name of t2:"+t2.getName());  
+      System.out.println("id of t1:"+t1.getId());  
+      
+      t1.start();  
+      t2.start();  
+      
+      t1.setName("Sonoo Jaiswal");  
+      System.out.println("After changing name of t1:"+t1.getName());  
+     }  
+    }  
+```
+
+output
+
+```
+Output:Name of t1:Thread-0
+       Name of t2:Thread-1
+       id of t1:8
+       running...
+       After changling name of t1:Sonoo Jaiswal
+       running...
+     
+```
+
+### The currentThread() method:
+The currentThread() method returns a reference to the currently executing thread object.
+
+
+```
+    class TestJoinMethod4 extends Thread{  
+     public void run(){  
+      System.out.println(Thread.currentThread().getName());  
+     }  
+     }  
+     public static void main(String args[]){  
+      TestJoinMethod4 t1=new TestJoinMethod4();  
+      TestJoinMethod4 t2=new TestJoinMethod4();  
+      
+      t1.start();  
+      t2.start();  
+     }  
+    }  
+```
+
+output
+
+```
+Output:Thread-0
+       Thread-1
+```
+
+
+### Naming Thread
+
+The Thread class provides methods to change and get the name of a thread. By default, each thread has a name i.e. thread-0, thread-1 and so on. By we can change the name of the thread by using setName() method. The syntax of setName() and getName() methods are given below:
+
+1.    public String getName(): is used to return the name of a thread.
+2.    public void setName(String name): is used to change the name of a thread.
+
+```
+    class TestMultiNaming1 extends Thread{  
+      public void run(){  
+       System.out.println("running...");  
+      }  
+     public static void main(String args[]){  
+      TestMultiNaming1 t1=new TestMultiNaming1();  
+      TestMultiNaming1 t2=new TestMultiNaming1();  
+      System.out.println("Name of t1:"+t1.getName());  
+      System.out.println("Name of t2:"+t2.getName());  
+       
+      t1.start();  
+      t2.start();  
+      
+      t1.setName("Sonoo Jaiswal");  
+      System.out.println("After changing name of t1:"+t1.getName());  
+     }  
+    }  
+```
+
+output
+
+```
+Output:Name of t1:Thread-0
+       Name of t2:Thread-1
+       id of t1:8
+       running...
+       After changeling name of t1:Sonoo Jaiswal
+       running...
+```
+
+### Current Thread
+
+The currentThread() method returns a reference of currently executing thread.
+
+
+        public static Thread currentThread()  
+
+### Example of currentThread() method
+
+```
+    class TestMultiNaming2 extends Thread{  
+     public void run(){  
+      System.out.println(Thread.currentThread().getName());  
+     }  
+     public static void main(String args[]){  
+      TestMultiNaming2 t1=new TestMultiNaming2();  
+      TestMultiNaming2 t2=new TestMultiNaming2();  
+      
+      t1.start();  
+      t2.start();  
+     }  
+    }  
+```
+output
+
+```
+Output:Thread-0
+       Thread-1
+```
+
+## Priority of a Thread (Thread Priority):
+
+Each thread have a priority. Priorities are represented by a number between 1 and 10. In most cases, thread schedular schedules the threads according to their priority (known as preemptive scheduling). But it is not guaranteed because it depends on JVM specification that which scheduling it chooses.
+
+### 3 constants defined in Thread class:
+
+1.    public static int MIN_PRIORITY
+2.    public static int NORM_PRIORITY
+3.    public static int MAX_PRIORITY
+
+Default priority of a thread is 5 (NORM_PRIORITY). The value of MIN_PRIORITY is 1 and the value of MAX_PRIORITY is 10.
+
+### Example of priority of a Thread:
+
+```
+class TestMultiPriority1 extends Thread{  
+ public void run(){  
+   System.out.println("running thread name is:"+Thread.currentThread().getName());  
+   System.out.println("running thread priority is:"+Thread.currentThread().getPriority());  
+  
+  }  
+ public static void main(String args[]){  
+  TestMultiPriority1 m1=new TestMultiPriority1();  
+  TestMultiPriority1 m2=new TestMultiPriority1();  
+  m1.setPriority(Thread.MIN_PRIORITY);  
+  m2.setPriority(Thread.MAX_PRIORITY);  
+  m1.start();  
+  m2.start();  
+   
+ }  
+} 
+
+```
+
+output
+
+```
+       running thread name is:Thread-0
+       running thread priority is:10
+       running thread name is:Thread-1
+       running thread priority is:1
+       
+```
+
+
+## Daemon Thread in Java
+
+Daemon thread in java is a service provider thread that provides services to the user thread. Its life depend on the mercy of user threads i.e. when all the user threads dies, JVM terminates this thread automatically.
+
+There are many java daemon threads running automatically e.g. gc, finalizer etc.
+
+You can see all the detail by typing the jconsole in the command prompt. The jconsole tool provides information about the loaded classes, memory usage, running threads etc.
+
+
+### Points to remember for Daemon Thread in Java
+
+    It provides services to user threads for background supporting tasks. It has no role in life than to serve user threads.
+
+    Its life depends on user threads.
+
+    It is a low priority thread.
+
+
+### Why JVM terminates the daemon thread if there is no user thread?
+
+The sole purpose of the daemon thread is that it provides services to user thread for background supporting task. If there is no user thread, why should JVM keep running this thread. That is why JVM terminates the daemon thread if there is no user thread.
+
+
+### Methods for Java Daemon thread by Thread class
+
+The java.lang.Thread class provides two methods for java daemon thread.
+
+|   No.	|   Method	|   Description |
+| ------------- | ------------- | ------------- |
+|   1)	|   public void setDaemon(boolean status)	|   is used to mark the current thread as daemon thread or user thread. |   
+|   2)	|   public boolean isDaemon()	|   is used to check that current is daemon.    |
+
+
+### Simple example of Daemon thread in java
+
+```
+public class TestDaemonThread1 extends Thread{  
+ public void run(){  
+  if(Thread.currentThread().isDaemon()){//checking for daemon thread  
+   System.out.println("daemon thread work");  
+  }  
+  else{  
+  System.out.println("user thread work");  
+ }  
+ }  
+ public static void main(String[] args){  
+  TestDaemonThread1 t1=new TestDaemonThread1();//creating thread  
+  TestDaemonThread1 t2=new TestDaemonThread1();  
+  TestDaemonThread1 t3=new TestDaemonThread1();  
+  
+  t1.setDaemon(true);//now t1 is daemon thread  
+    
+  t1.start();//starting threads  
+  t2.start();  
+  t3.start();  
+ }  
+} 
+```
+
+output
+
+```
+daemon thread work
+user thread work
+user thread work
+```
+
+Note: If you want to make a user thread as Daemon, it must not be started otherwise it will throw IllegalThreadStateException.
+
+Ex :
+```
+    class TestDaemonThread2 extends Thread{  
+     public void run(){  
+      System.out.println("Name: "+Thread.currentThread().getName());  
+      System.out.println("Daemon: "+Thread.currentThread().isDaemon());  
+     }  
+      
+     public static void main(String[] args){  
+      TestDaemonThread2 t1=new TestDaemonThread2();  
+      TestDaemonThread2 t2=new TestDaemonThread2();  
+      t1.start();  
+      t1.setDaemon(true);//will throw exception here  
+      t2.start();  
+     }  
+    }  
+
+Test it Now
+```
+
+Output:exception in thread main: java.lang.IllegalThreadStateException
+
+## Java Thread Pool
+
+Java Thread pool represents a group of worker threads that are waiting for the job and reuse many times.
+
+In case of thread pool, a group of fixed size threads are created. A thread from the thread pool is pulled out and assigned a job by the service provider. After completion of the job, thread is contained in the thread pool again.
+
+### Advantage of Java Thread Pool
+
+Better performance It saves time because there is no need to create new thread.
+
+### Real time usage
+
+It is used in Servlet and JSP where container creates a thread pool to process the request.
+
+### Example of Java Thread Pool
+
+https://www.javatpoint.com/java-thread-pool
+
+
+Let's see a simple example of java thread pool using ExecutorService and Executors.
+
+File: WorkerThread.java
+
+```
+import java.util.concurrent.ExecutorService;  
+import java.util.concurrent.Executors;  
+class WorkerThread implements Runnable {  
+    private String message;  
+    public WorkerThread(String s){  
+        this.message=s;  
+    }  
+     public void run() {  
+        System.out.println(Thread.currentThread().getName()+" (Start) message = "+message);  
+        processmessage();//call processmessage method that sleeps the thread for 2 seconds  
+        System.out.println(Thread.currentThread().getName()+" (End)");//prints thread name  
+    }  
+    private void processmessage() {  
+        try {  Thread.sleep(2000);  } catch (InterruptedException e) { e.printStackTrace(); }  
+    }  
+}
+```
+
+File: JavaThreadPoolExample.java
+
+```
+    public class TestThreadPool {  
+         public static void main(String[] args) {  
+            ExecutorService executor = Executors.newFixedThreadPool(5);//creating a pool of 5 threads  
+            for (int i = 0; i < 10; i++) {  
+                Runnable worker = new WorkerThread("" + i);  
+                executor.execute(worker);//calling execute method of ExecutorService  
+              }  
+            executor.shutdown();  
+            while (!executor.isTerminated()) {   }  
+      
+            System.out.println("Finished all threads");  
+        }  
+     }  
+```
+
+
+## ThreadGroup in Java
+
+Java provides a convenient way to group multiple threads in a single object. In such way, we can suspend, resume or interrupt group of threads by a single method call.
+
