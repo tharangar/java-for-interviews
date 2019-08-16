@@ -348,6 +348,37 @@ Set can be instantiated as:
 
 HashSet class implements Set Interface. It represents the collection that uses a hash table for storage. Hashing is used to store the elements in the HashSet. It contains unique items.
 
+### What is hashtable or hashmap
+
+Hashing is a technique that is used to uniquely identify a specific object from a group of similar objects.
+
+We use keys to identify objects uniquely (just like primary key). In case where the key are large and cannot be used directly as an index, you should use hashing.
+
+In hashing large keys are converted into small keys by using hash functions. The values are then stroed in the data structre called hash table.
+
+Each element is assigned a key which can be used to access the element.
+
+Hash function generate the hash using this key.
+
+ index of the hash table found by using modulo operator (%). It will make the index a number between 0 and array_size -1.
+
+
+hash = hashfunction(key)
+index = hash % array_size
+
+
+### Hash function
+
+A hash function is any function that can be used to map a data sent of an arbitrary size to a data set of a fixed size which falls into the hash table. The value returned by a hash function are called hash values, hash codes, hash sums, or simply hashes.
+
+Good hash functions
+
+1. Easy to calculate.
+2. Uniformly distributed across the hash table.
+3. Less collisions
+
+
+
 Consider the following example.
 
 
