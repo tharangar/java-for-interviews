@@ -1,3 +1,117 @@
+
+# DevOps
+
+Refference : ntelliPaat youtube video.
+
+## What is DevOps
+
+Developper develops the code
+Operation team test the code and deploy systems.
+
+When operation guy received the code from developper there may be some issues between those parties due to lack of understanding developed codes.
+
+This issue was solved using devops. DevOps is an idea of working in the way to solve above problem.
+Expected enhance productivity with frequent releases.
+
+
+### Definition
+
+![DevOps](devops.png?raw=true "DevOps")
+
+In present senario Dev guys dont handover just code to operation team . Now they build docker images and push it can be operated by opration team without having any overhead.
+
+### Devops Lifecycle
+
+![DevOps - LifeCycle](lifecycle.png?raw=true "DevOps Life Cycle")
+
+
+### How DevOps works
+
+![How DevOps works](cicd.png?raw=true "CICD")
+
+Developer pushes code to Version Control system. 
+Continuous integration will identify that programmer has pushed new codes to Vertion control system and then it test the code from testing server. If test succeeds code will be pushed to production server. 
+
+### Life Cycle stages in DevOps
+
+
+* Continous Development
+    Git isa distributed version-control system for tracking changes in computer files and coordination work on those files among multiple people.
+
+* Continous Integration
+    Jenkins is an open source automation server written in Java. Jenkins helps to auomate non human part.
+
+*   Continous Deployment
+    Configuration management  and Virtualization and containerziation are the main tasks in this stage.
+    puppet , Ansible used for configuration mangement and docker is used for virtualization and containerzation.
+
+*   Continous Testing
+    Selenium is a portable software-testing framework used for web applications. It is open source tool which is used for testing automation.
+
+*   Continous Monitoring
+    Nagios is a monitoring system, network and infrastructure. It also offer monitoring and alerting services .
+
+
+![How DevOps works with tools](tools.png?raw=true "Tools")
+
+
+Lets start with quick introduction with those tools.
+
+## Git
+
+Git is the most popular tool among all the DVCS tools.
+It is primaraly used for source-code management in software development, but it can be used to keep track of changes.
+
+
+### Create a repository
+
+    $ git init
+
+### Check the status
+
+    $ git status
+
+This command will shows the status and status of the repositor. Not added or modified files will be shown in red. Already added and un changed files will be shown in green.
+
+### Adding a file to the repository.
+
+    $ git add test.txt
+
+    Adding all changed or availabe files to the repostory
+
+    $ git add .
+
+    $ git commit -m "First commit "
+
+### Add remote repository
+
+Once everything is ready on our local, we can start pushing our changes to the remote repository. copy your repository link and paste it in the command.
+
+    $ git remote add origin "https://github.com/tharangar/centercore.git"
+
+### Push command to remote repository
+
+    $ git push origin master
+
+### How to get existing repository to local
+
+    $ git clone "URL"
+
+When you clone git repository data also comming . 
+
+
+
+
+
+
+
+
+
+
+
+# AWS 
+
+
 In Application deploymnet we are having follwoing drowbacks.
 
     This setup is expensive.

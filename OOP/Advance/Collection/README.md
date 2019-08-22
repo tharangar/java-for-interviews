@@ -482,6 +482,3 @@ Ajay
 Ravi
 Vijay
 ```
-
-
-
