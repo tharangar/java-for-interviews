@@ -97,12 +97,17 @@ Once everything is ready on our local, we can start pushing our changes to the r
 
     $ git clone "URL"
 
-When you clone git repository data also comming . 
+When you clone git repository whole repository will be coppied to your local pc with repository configuration.
 
 
+### Pullin the latest changes from the repository
+
+    $ git pull <URL link>
+
+The git pull command is also used for pullng the latest changes fromt he repository, unlike git clone, this command can only work inside an initialized git repository. This command is used when you are already working in the cloned repository, and want to pull the latest changes, that others might have pushed to the remote repository.
 
 
-
+### Branch
 
 
 
