@@ -109,6 +109,63 @@ The git pull command is also used for pullng the latest changes fromt he reposit
 
 ### Branch
 
+Git branches are used to handle the workspace of multiple developpers.
+Creating a branch is used bellow command and when we create the branch last commit of the master branch will be copy to it.
+
+    $ git branch branch1
+
+Delethe a branch
+
+    $ git branch -D branch1
+
+List the branches
+
+    $ git branch
+
+Pushing to remote branches.
+
+    $ git push origin branch1
+
+
+### To switch to the new bracn
+
+    $ git checkout branch1
+
+
+### Every commit dtails can be viewed by log command
+
+    $ git log
+
+History details has who has done it and commit id data and what is done. If you are in a feature branch you can see only brach commits.
+
+
+### Save work without commit.
+
+Want to save your work without committing the code ? Git has got you covered. This can be helful when you want to switch branches, but do not want to save your work to your git repository. To stash your staged files without committing just type in 
+
+    $ git stash
+If you want to stash your untracked files as well , type 
+
+    $ git stassh -u
+
+Once you are back and want to retrive working, type in 
+
+    $ git stash pop
+
+
+### git revert
+
+This command helps you in reverting a commit, to a pervious version. commit ID can be taken from log
+
+    $ git revert <commit id>
+
+### Understanding difference between two file or two commits.
+
+    git diff <commit id 1> <commit id 2>
+
+
+
+
 
 
 
