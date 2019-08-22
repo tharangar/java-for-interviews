@@ -376,21 +376,50 @@ All container health will monitored by docker itself. What Swarn do orchestraion
 
 Docker container should have more than one machine to be a distributed type architecture to manage high availability for docker swarm. Docker swarm will be installed when docker is installed.
 
+Docker swarm is a clustering and sheduling tool.
+
 It manage many worker with leader in cluster.
 
 This will create the leader node for cluster
 
     $ docker swarm init --advertise-addr:<ip of the leader>
 
-It will create the command which is requied other worker nodes to join this cluster.
+It will create the command which is requied other worker nodes to join this manager (leader ) in this cluster.
 
-View available nodes.
+So you have to update, install docker and exicute above swarn join command in each worker node.
+
+View available nodes from leader (master node)
 
     $ docker nodes ls
 
-Use bellow command to leave the cluster.
+Use bellow command to leave the cluster for worker.
 
     $ docker swarm leave
+
+Use bellow command to leave the cluster for leader.
+
+    $ docker swarm leave --force
+
+
+    $ docker swarm lead 
+
+
+This is how we can create docker swarm custer.
+
+
+Then we deploy our apps as service in docker swarm. Basically service represent one app in swarn architecture.
+
+    $ docker service create --name <name of the service> --replicas 5 -p 83:80 <image name>
+
+Swarm is responsible to deploy these apps using available nodes in cluster. If you deleted any number of container in one node you will see swarn will create the containers automatically and it is called auto scalling.
+
+
+
+
+
+
+
+
 
 
 
