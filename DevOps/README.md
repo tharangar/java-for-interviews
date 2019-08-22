@@ -161,8 +161,236 @@ This command helps you in reverting a commit, to a pervious version. commit ID c
 
 ### Understanding difference between two file or two commits.
 
-    git diff <commit id 1> <commit id 2>
+    git diff <commit id version x> <commit id version y>
 
+
+# Docker
+
+ If Dev guy want to give the appliction code to operation tema, ops guy has to know the all versions of os, libries, languages and all components used for development. So it is a painfull task. So the soluton is to use a container with the requied os, libries and language versions configured and application also contained. Docker comes as a good solution for this container creation. When we docker with traditional vm, vm has whole os in the container and it runs on hypervisor run top op the host operating system but docker runs on container engine.
+
+ Docker has many os images from vary light weight like alpine to any other os you want.
+
+
+### Docker installation.
+
+MAC, Windows and Dabian has different installtion methods. It is very easy with ubuntu.
+
+    $ sudo apt-get update
+    $ sudo apt-get install docker.io
+
+
+
+### Docker Lifecycle
+
+![Docker life cycle](docker-lifecycle.png?raw=true "Docker Lifecycle")
+
+### Docker Comands
+
+    Check docker version
+
+    $ docker -version
+
+    Download docker images from docker hub
+
+    $ docker pull ubuntu
+
+    Check downloaded images
+
+    $ docker images
+
+    Run the image
+
+    $ docker run -it -d
+
+    -d : run the container in the back ground (deamon)
+    -it : make container interactive
+
+    Opening port to access from your host when container up
+
+    $ docker run -it -p 82:80 -d tharangar/testserver
+
+    List of currently running containers
+
+    $ docker ps
+    
+    stoping the container
+
+    $ docker stop <container id>
+
+    Accessing the container
+
+    $ docker exec -it <image id> 
+
+    -it : to be interractive
+
+    Killing the container will stop and remove the container.
+
+    $ docker rm <container id>
+
+    Deleting a already running container
+
+    $ docker rm -f <container id>
+
+    Remove images from your local docker repository
+
+    $ docker rmi <image id> 
+
+you can use docker hub to keep your personal docker images. go to https://hub.docker.com and create your own account.
+
+### Creating custom containers (Saving changes to container) and push them to docker hub.
+
+    First run a container
+
+    $ docker run -it -d ubuntu
+
+    Do the changes first
+
+    Save the image
+
+    $ docker commit <container id> <your docker username/new image name>
+
+    This step will ceate a new image with given name and it include your changes too. This is how we can create custom containers.
+
+    Push your customer image to docker hub
+
+    $ docker login
+
+    Provide docker hub username and password and after succesfull login message received you can push your image.
+
+    $ docker push tharangar/testserver 
+
+### Removing all containers in the system
+
+    $ docker rmi (docker ps -aq)
+
+
+
+### Dockerfile
+
+We can use dockerfile for customization docker images. Using docker build users can create an automated build of container images.
+
+### Main key words in dockerfile
+
+FROM : define the base image
+
+ADD : Add files to the container being build.
+    Ex : ADD <source directory> <container directory>
+    Ex : Add . /var/www
+
+RUN : this command add a layer in container by installing and exicuting commands.
+
+CMD : This is running command at the start of the contariner.This command running only when there is no argument specified while running the container.
+    EX : CMD apachectl -D FOREGROUND
+
+ENTRYPOINT : Better to use Entripoint instead of cmd
+
+ENV : we can set any environment variable by theis command.
+    EX : ENV name Devops
+
+### Sample docker file
+
+```
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install apache2
+ADD . /var/www/html
+ENTRYPOINT apachectl -D FOREGROUND
+ENV name new_dockerfile
+```
+Save above file as Dockerfile and run following command to build image called new_dockerfile
+
+    $ docker build . -t new_dockerfile
+
+
+Then list the images you may see the new image has created you container and check using the browser.
+
+    $ docker run -it -p 82:80 -d new_dockerfile
+
+
+### Docker Volumes.
+
+First method is bind-mount which enables us to map internal folder to host machine folder. There are some drowback with this setting due to different os and file path changes will not work this solution.
+
+    $ docker run -it -v /home/ubuntu/test: /app -d ubuntu
+
+The solution for above issue is docker volume
+Docker volumes are used to persist data across the docker life cycle.
+
+    $ docker volume create test
+
+    View present volumes
+
+    $ docker volume ls
+
+    Run the application with created volume test
+
+    $ docker run -it --mount source=test,target=/app -d ubuntu
+
+This method will alow you to protect your data eventhough container removed. Furthe it will be shared by all containers which use the same volume name and data can be accessed from any container.
+
+    Coppying files to container volume
+
+    $ docker cp ./test.txt <containerid>:/app
+
+Another imporatant thing what ever we put to the volume can be accessed only from volume mounted container. You cant access any file without mounting the volume.
+
+### Microservices
+
+Monolithic application is single-tiered software application in which different components are combined into a single program which rsides in a single platform.
+
+But this is hard to do maintenance and all components are dependent eachother and each components impact to others. So updating or bug fixing in one componenet will couased for entire system down time.
+
+Such application is large and complex to understand. 
+
+Has a barrier to adopting new technologies.
+
+Solution is microservic architecture.
+
+Microservices are a software development architectural style that structures an a application development as components are loosly couplecd. We can use any technology for any components but there communication happens over apis.
+
+### Docker compose
+
+Docker compse is the tool for defining and running milti-container Docker applications. With compose, you use a ymal file to intrograte many containers as one file.
+
+### Installing docker compose
+
+    $ docker-compose --version
+
+You have to check whether it is already available if not you have to install it manually.
+
+
+![Docker Compose](docker-compose.png?raw=true "Docker Compose")
+
+
+Above file can be found in dockr.doc for wordpress.
+
+    $ docker-compose up -d
+
+To find the file automatically it's name should be docker-compose.yaml or docker-compose.yml
+
+When you run above program you may find workpress systme over port 8000.
+
+### Container Orchestration tools (Swarn)
+
+All container health will monitored by docker itself. What Swarn do orchestraion automatically monitoring health and keep containers up and running.
+
+Docker container should have more than one machine to be a distributed type architecture to manage high availability for docker swarm. Docker swarm will be installed when docker is installed.
+
+It manage many worker with leader in cluster.
+
+This will create the leader node for cluster
+
+    $ docker swarm init --advertise-addr:<ip of the leader>
+
+It will create the command which is requied other worker nodes to join this cluster.
+
+View available nodes.
+
+    $ docker nodes ls
+
+Use bellow command to leave the cluster.
+
+    $ docker swarm leave
 
 
 
