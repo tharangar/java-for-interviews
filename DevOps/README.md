@@ -261,9 +261,12 @@ you can use docker hub to keep your personal docker images. go to https://hub.do
 
 ### Removing all containers in the system
 
-    $ docker rmi (docker ps -aq)
+    $ docker rm (docker ps -a -q)
 
 
+### Remove even running containers
+
+    $ $ docker rm -f (docker ps -a -q)
 
 ### Dockerfile
 
@@ -413,13 +416,60 @@ Then we deploy our apps as service in docker swarm. Basically service represent 
 
 Swarm is responsible to deploy these apps using available nodes in cluster. If you deleted any number of container in one node you will see swarn will create the containers automatically and it is called auto scalling.
 
+View all running services
+
+    $ docker service ls
+
+Scalling a service ( number of replicas can be chaned )
+
+    $ docker service scale <service name>=2
+
+Removing a service
+
+    $ docker service rm 
 
 
 
+# Configuration Management using puppet
+
+puppet is an open-source software configuration management tool. It runs on many unix like systems as well as windows.
+
+Puppet follows a Master Slave Architecture. Slave of puppet send machine metadata or state to master. If there is change in the state , master does analysis on the data, and if any change is needed, send the required changes to the slave.
+Then slave does the changes, and sends a report back to master, of the changes.
+
+All the communication between the master node and the slave nodes are encripted using SSL certificates.
 
 
 
+![Puppet communication](puppet-ssl.png?raw=true "Puppet node communication")
 
+
+### Lets see how to install and do above configuration for puppet.
+
+Installing puppet in dabian version clearly described in bellow url with prerequisites.
+
+https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/how-to-install-puppet-on-ubuntu-16-04.html
+
+
+### Install NTP
+
+Time must be set accurately on a puppet master as it will be acting as a certificate authority to sign the certificates coming from the client nodes. We will use NTP for this purpose.
+
+
+```
+sudo apt update
+sudo apt install -y ntp ntpdate
+sudo ntpdate -u 0.ubuntu.pool.ntp.org
+```
+
+```
+$ sudo apt-get update
+
+$ sudo apt-get install wget
+
+
+
+```
 
 
 
