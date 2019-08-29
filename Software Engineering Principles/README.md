@@ -53,6 +53,8 @@ If bussiness logic change frequently and highly reusable is more eligible for SO
 6. SOAP (Simple object Access Protocol)
 
 
+![SOA](soa.png?raw=true "SOA")
+
 ### Web Services
 
 This is the most widely used concept for SOA implementation.
@@ -88,6 +90,35 @@ In the micro services architecture the service definistion becomes further granu
 ### IT platforms for SOA
 
 Desired preformance and availability should be reflected int he plat forms. Fault tolerant clustered platforms are requred for higher availability srvices. Disaster recovery is also required.
+
+
+### Restful Web Services
+
+ReprEsentation State Transfer (REST)
+
+As a solution for web srvices heavyweight standards that are inefficient restfull came to the arena.
+
+REST styple is simpler than SOAP/WSDL for implementing web services.
+
+RESTful services involve a lover overhead. REST unlike SAOP. It is not web service standard or  protocol but an architectural style and it uses web standards like URL, XML, JSON, MimE, types.
+
+Rest is scalable and simple . Main intention of rest is if web is good enough for humans it should be dhould enough for mechine to machine interaction. 
+
+So REST run on http protocol and it could make web services that uses the same principles that made the www such a success.
+
+Rest architectue is also client server paradigm and it also stateless like http.
+
+** Remember due to http is stateless some techniques like session, cookies are used to keep some prefferences for client side from servers.
+
+REST uses different URLs to address resources and it maps the type of access to http methods.
+
+
+
+
+
+
+
+
 
 
 
