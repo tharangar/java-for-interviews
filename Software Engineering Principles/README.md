@@ -1,4 +1,97 @@
 
+# Evolution of Programming
+
+1.  Procedural Programming
+
+2.  Object Oriented Programming (OOP)
+
+3.  Service Oriented Programming (SOP)
+
+
+### Proecudural Programming
+
+Function is everything. There were many difficulties in code reusability and code management.
+
+### Object Oriented Programming
+
+Classes and objects are everything. Main principles are Abstraction, Encapsulation, Inheritance and polymorphism. OOP increased code reusability and code managment. But the weekness is the communication between applications specially when they are written in different languages.
+
+### Service Oriented Programming
+
+Service is a well defined function and it does not depends on the context or state of other services. Services are communicating with other services using messages which every service can understand.
+
+SOA can accommodate rapid changes tot he IT industry and reuse of services across multiple business process automations.
+Further services can be discovered and interfaces can be changed without major changes to applications.
+
+Real-time applictions are less suitable to SOA architecutre like telco real-time rating and call control.
+
+Loose coupling, resuability and easy access pioritized by SOA but security comes next. So confidential informaiton is better kept isolated from common access through SOA.
+
+There is no advantage using SOA for less resusble and non-hub applications.
+
+If bussiness logic change frequently and highly reusable is more eligible for SOA. EX : payment requsts, balance inqueries, ldap requests, customer authentication.
+
+
+### Basic Principles of SOA
+
+1.  Technology neutral
+2.  Statelessness
+3.  Loose couling
+4.  Reusability
+5.  Abstracted
+6.  Published
+7.  Formal contract
+
+
+### SOA can be implemented using following technologies.
+
+1.  Web services
+2. RPC
+3.  CORBA (Common Object Request Broker Architecture)
+4.  RMI (Remote Mthod Invocaiton)
+5.  DCOM
+6. SOAP (Simple object Access Protocol)
+
+
+### Web Services
+
+This is the most widely used concept for SOA implementation.
+web services are functional blocks or services exposed to the Internet using internet protocols. Further it is independent form platforms and programming languages.
+
+### UDDI
+
+UDDI (Universal Description Discovery and Integration ) describe and publish the srevices in the web to be inquired by the service requesters.
+UDDI is a XML based registry for businesses worldwide to listh themselves on the internet and UDDI is a web service standard.
+It is designed to be interrogated by SOAP messages and to provide access to tweb Services Description language (WSDL)
+
+In the micro services architecture the service definistion becomes further granular. Monolithic applications represent the single tired  software application consists of interfaces and data access codes are combined as a one single program.
+
+
+### SOA Governance
+
+1.  Compliance to standards and laws.
+2.  Change managment.
+3.   Using policies to retrict behaviours.
+4.  Monitor performance of services.
+
+
+### SOA change management guidelines.
+
+1.  Introduce interface version to sustain the proactive nature of services.
+2.  Adopt a clear version support ploicy.
+
+3.  Spend considerable time and effort on designing interfaces.
+
+4.   Adpt a SOA governance framework.
+
+
+### IT platforms for SOA
+
+Desired preformance and availability should be reflected int he plat forms. Fault tolerant clustered platforms are requred for higher availability srvices. Disaster recovery is also required.
+
+
+
+
 ## SOLID Principle
 
 https://howtodoinjava.com/best-practices/5-class-design-principles-solid-in-java/
@@ -109,7 +202,7 @@ public class IsbnEditor extends PropertyEditorSupport {
     @Override
     public String getAsText() {
         Isbn isbn = (Isbn) getValue();
-        if (isbn != null) {
+        if (isbn != null) {http://localhost/
             return isbn.getIsbn();
         } else {
             return "";
@@ -136,3 +229,6 @@ In other words. we should design our software in such a way that various modules
 The classical use of this principle of bean configuration in Spring framework.
 
 In spring framework, all modules are provided as separate components which can work together by simply injected dependencies in other module. This dependency is managed externally in XML files.
+
+
+

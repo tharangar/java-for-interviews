@@ -434,6 +434,10 @@ Removing a service
 
 puppet is an open-source software configuration management tool. It runs on many unix like systems as well as windows.
 
+### Agent / Master
+
+In this architecture, one or more servers run the puppet master application and puppet agent application runs on managed nodes (client servers), usually as a background service.
+
 Puppet follows a Master Slave Architecture. Slave of puppet send machine metadata or state to master. If there is change in the state , master does analysis on the data, and if any change is needed, send the required changes to the slave.
 Then slave does the changes, and sends a report back to master, of the changes.
 
@@ -467,9 +471,55 @@ $ sudo apt-get update
 
 $ sudo apt-get install wget
 
+Check the date
 
+$ date
+
+If there are any discrepancies, change it accordingly. List the available time zones.
+
+$ timedatectl list-timezones
+
+Set the time zone using the following command.
+
+$ sudo timedatectl set-timezone America/New_York
 
 ```
+
+### DNS
+
+Puppet agent uses the hostname to communicate with the Puppet Server. So, make sure the agent node can resolve the hostname of the Puppet Server. Either setup /etc/hosts file or 
+
+    $ sudo nano /etc/hosts
+
+Add a host entry similar to the below line.
+
+    192.168.1.10 server.itzgeek.local server
+
+### Setup PuppetLabs repository
+
+To install the puppet master/agent, we would require to set up a puppet repository on all nodes.
+
+```
+Ubuntu 18.04 
+
+wget https://apt.puppetlabs.com/puppet6-release-bionic.deb
+sudo dpkg -i puppet6-release-bionic.deb
+sudo apt update
+```
+
+On Ubuntu 18.04, enable the universe repository, which contains packages necessary for Puppet Server.
+
+### Install Puppet Server
+
+Puppet Server is the server software that runs on the puppet master node. Install the Puppet server using below command.
+
+    $ sudo apt install -y puppetserver
+
+Puppet server is now installed, do not start the puppet server service yet.
+
+
+
+
 
 
 
