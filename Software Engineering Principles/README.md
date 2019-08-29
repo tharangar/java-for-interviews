@@ -113,9 +113,47 @@ Rest architectue is also client server paradigm and it also stateless like http.
 REST uses different URLs to address resources and it maps the type of access to http methods.
 
 
+### ROA (Resouce Oriented Architectur)
+
+Due to Restfull technology all resouces in a system could be accessed with a seperate urls. Then this architecture was called Resource Oriented Architecture.
+
+In REST , everything on the network is a resource
+
+ - Resources are addressable via URIs.
+ 
+ - Resources are self descriptive
+ 
+ - Resources are stateless
+ 
+ - Resources are manipulated via HTTP verbs and the uniform interface.
 
 
+### Web Oriented Architecture (WOA)
 
+We consider after 2010 it is web oriented era. With the concept of web 2.0 this idea was began. Following characteristics are found.
+
+*   Creating Applications as platforms.
+*   Simple Models :REST, Syndication, Widgets, OpenAPIs.
+*   Interoperability and Reuse.
+*   Driven by Network Effects and Viral Adoption.
+*   Mashups and Rich Internet Applications.
+*   Peer Production and Social Dynamics.
+
+
+Anyway the central goal of SOA being turning appplications into open platforms. The increasing realization that there is limited business value in single applications. Businessses connecting to each other over the internet via web services. Many companies have opened their SOA to the web.
+
+
+Finaly WOA also SOA.Basic tenets of SOA including the 8 princoples are follewed by WOA too. So best SOA can be implemented with WOA.
+
+SOA uses WS-Security and other sophisticated standards for security, while WOA tends to just use HTTPS, OAuth, and HMAC-SHA-1.
+
+### What is a "mashup"?
+
+A mashup is a web site or web application that seamlessly combines content from more than one source into an integrated experiance. Content used in mashups is usually sourced from a 3 rd party via a public interface (API).
+Other methods of sourcing content for mashups include web feeds (e.g. RSS or Atom), and  JavaScript/Flash "widgets".
+
+
+** So applications are converting to WOA and open ended services with the support of cloud infrastructures.
 
 
 
