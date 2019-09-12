@@ -50,7 +50,7 @@ Fraemworks and libraries are not design patterns; they provide specific implemen
 
 3.  OO Patterns
 
-    Stratery - Design a family of algorithms
+    Strategy - Design a family of algorithms
 
     Observer - Define a one to many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically
 
@@ -67,3 +67,7 @@ Fraemworks and libraries are not design patterns; they provide specific implemen
 4. Most patterns allow some part of a systme to vary independently of all other parts.
 
 5. Patterns provide a shared language that can maximize the value of your communication with other developers.
+
+Pattern is a solution to a problem in a context.
+Design patterns are general solutions to common problems. A pattern is a guildeline for flexible and resilient code desing.
+

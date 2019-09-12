@@ -161,7 +161,7 @@ Other methods of sourcing content for mashups include web feeds (e.g. RSS or Ato
 
 
 
-## SOLID Principle
+# SOLID Principle
 
 https://howtodoinjava.com/best-practices/5-class-design-principles-solid-in-java/
 
