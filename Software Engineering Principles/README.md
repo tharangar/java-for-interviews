@@ -147,6 +147,73 @@ Finaly WOA also SOA.Basic tenets of SOA including the 8 princoples are follewed 
 
 SOA uses WS-Security and other sophisticated standards for security, while WOA tends to just use HTTPS, OAuth, and HMAC-SHA-1.
 
+
+### WOA is for enterprices too.
+
+1.  Classical SOA is not growing.
+
+2.  SOAP is in decline.
+
+3.  REST Grew from 14% percent.
+
+
+![SOA and WOA](web2.png?raw=true "SOA over WOA")
+
+![SOA and WOA](soa-web2.png?raw=true "SOA over WOA")
+
+In SOAP Seperate contract and Service architecture was used to retrive service description and use the service by client.
+
+![WSDL](wsdl.png?raw=true "WSDL")
+
+Above architecture is known as WS-* (World of Standards).
+
+It is bunch of standards and made SOAP a technology with lotof standards for different perposes.
+
+
+Instead REST was simple.
+
+1.  Resources are addressable via URIs.
+2.  Resources are self descriptive. (using content type and xml body)
+3.  Resources are stateless.
+4.  Resources are manipulated via HTTP verbs and uniform interface.
+
+![UNIFORM](uniform.png?raw=true "Uniform")
+
+
+## Advantages to REST.
+
+Linkability : Everything is accessible and addressable via a simple URL.
+    - Countless benefits from discoverability to consumption to analytics and link ecosystems.
+
+Simplicity (easy to provide / consume)
+
+Uniform interface
+
+Testable via a browser
+
+No WSDL or traditional service contracts.
+    - Allows minimal surface area contract checking (more on this)
+
+Is easily consumed by dynamic languages such as Javascript or Ruby.
+
+high performance: Works will with cashes.
+
+Rest is the foundational network protocol for WOA.
+
+
+### WOA differences with traditional SOA
+
+Traditional SOA builds a messaging layer above HTTP using SOAP and WS-* that provides unique and sometimes prohibitive constraints to the web developer.
+
+SOA finds http and related transfer mechanisms to be the ideal layer of abstraction for most applications.
+
+SOA uses WS-security and other sophisticated standards for security, while WOA tends to just use HTTPS, OAuth, and HMAC-SHA-1.
+
+SOA tend to have a small and well-defined set of endpoints through which many types of data na data instances can pass while WOAs tend to have very large and open-ended number of endpoints; one for each individual resource.
+
+
+
+
 ### What is a "mashup"?
 
 A mashup is a web site or web application that seamlessly combines content from more than one source into an integrated experiance. Content used in mashups is usually sourced from a 3 rd party via a public interface (API).
@@ -154,6 +221,8 @@ Other methods of sourcing content for mashups include web feeds (e.g. RSS or Ato
 
 
 ** So applications are converting to WOA and open ended services with the support of cloud infrastructures.
+
+
 
 
 
