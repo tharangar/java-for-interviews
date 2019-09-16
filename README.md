@@ -14,3 +14,7 @@ Linkedin
 
 https://www.glassdoor.com/member/profile/index.htm
 
+
+
+## Enterprise Patterns and Popular Web Architectures.
+
