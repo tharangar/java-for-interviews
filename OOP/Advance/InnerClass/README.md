@@ -31,9 +31,14 @@ There are basically three advantages of inner classes in java. They are as follo
 3) Code Optimization: It requires less code to write.
 
 
+
 ### Difference between nested class and inner class in Java
 
 Inner class is a part of nested class. Non-static nested classes are known as inner classes. 
+
+
+![Thread status](innerclass.jpg?raw=true "Thread status")
+
 
 
 ### Types of Nested classes
