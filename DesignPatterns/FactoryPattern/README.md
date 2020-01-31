@@ -4,7 +4,7 @@ Factory pattern is one of the most used design patterns in Java. This type of de
 
 ### Factory Pattern Implementation
 
-![Factory Design Pattern ](factory.png?raw=true "Factory")
+![Factory Design Pattern ](factory.PNG?raw=true "Factory")
 
 
 ### Step 1 Create an interface Shape.java
