@@ -12,7 +12,9 @@ public class Logger {
     // this logger can be accessed only from this class 
     private static Logger logger;
 
-    public Logger(){
+    // Once the constructor is private then the this object cant be initiated from the out side by new Logger.
+    
+    private Logger(){
 
 
     } 

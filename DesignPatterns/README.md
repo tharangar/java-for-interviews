@@ -48,6 +48,8 @@ Fraemworks and libraries are not design patterns; they provide specific implemen
 
     Strive for loosely coupled designs between objects that interact.
 
+    Classes should be open for extension but closed for modification.
+
 3.  OO Patterns
 
     Strategy - Design a family of algorithms
