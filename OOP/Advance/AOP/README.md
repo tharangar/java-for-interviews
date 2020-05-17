@@ -130,6 +130,11 @@ spring-aop-4.1.6 ...
 spring-aspects-4. ***
 aspectjveaver-1.8 ***
 
+
+
+![AOP](aop.PNG?raw=true "AOP")
+
+
 ### Pointcut
 An expression which determines when and what and what are the method to be intercpeted.
 
@@ -161,7 +166,6 @@ Joinpoint is what receive when the method is excecuting. It is runtime what the 
 
 Entire process of above we discussed is called weaving.
 
-![AOP](aop.PNG?raw=true "AOP")
 
 
 ![AOP](aop-core.PNG?raw=true "AOP")
@@ -172,6 +176,6 @@ Entire process of above we discussed is called weaving.
 
 
 
-### For a deepa understanding.
+### For a deep understanding.
 
 https://docs.spring.io/spring/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html
