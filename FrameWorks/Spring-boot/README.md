@@ -210,7 +210,9 @@ Features include
 * PROVIDE A THREAD DUMP FROM THE APPLICATION's JVM
 * ACCEPTS TEST/PLAIN REQUEST
 * COMPATIVLE WITH following THREAD DUMP ANALIZERS.
+
     https://fastthread.io
+    
     https://github.com/irockel/tda
 
 How to activate Actuator in a project
