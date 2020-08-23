@@ -76,10 +76,321 @@ https://youtu.be/RseVNuNKjoY
 
 
 
-    *  step - A Step that delegates to a Job to do its work. This is a great tool for managing dependencies between jobs, and also to modularise complex step logic into something that is testable in isolation. The job is executed with parameters that can be extracted from the step execution, hence this step can also be usefully used as the worker in a parallel or partitioned execution.
+    step - A Step that delegates to a Job to do its work. This is a great tool for managing dependencies between jobs, and also to modularise complex step logic into something that is testable in isolation. The job is executed with parameters that can be extracted from the step execution, hence this step can also be usefully used as the worker in a parallel or partitioned execution.
 
     ItemReader - Strategy interface for providing the data. Implementations are expected to be stateful and will be called multiple times for each batch, with each call to read() returning a different value and finally returning null when all input data is exhausted. Implementations need not be thread-safe and clients of a ItemReader need to be aware that this is the case. A richer interface (e.g. with a look ahead or peek) is not feasible because we need to support transactions in an asynchronous batch.
 
     ItemProcessor - Interface for item transformation. Given an item as input, this interface provides an extension point which allows for the application of business logic in an item oriented processing scenario. It should be noted that while it's possible to return a different type than the one provided, it's not strictly necessary. Furthermore, returning null indicates that the item should not be continued to be processed.
-    
+
     ItemStreamWriter - Basic interface for generic output operations. Class implementing this interface will be responsible for serializing objects as necessary. Generally, it is responsibility of implementing class to decide which technology to use for mapping and how it should be configured. The write method is responsible for making sure that any internal buffers are flushed. If a transaction is active it will also usually be necessary to discard the output on a subsequent rollback. The resource to which the writer is sending data should normally be able to handle this itself.
+
+***
+
+### how this is implemented in the coding
+
+which si in the attached project.
+
+### POM.xml
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.javainuse</groupId>
+	<artifactId>springboot-batch</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+
+	<name>SpringBatch</name>
+	<description>Spring Batch-Spring Boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.3.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+```
+
+### Create a batch configuration class as below.
+
+```
+package com.javainuse.config;
+
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecutionListener;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.javainuse.listener.JobCompletionListener;
+import com.javainuse.step.Processor;
+import com.javainuse.step.Reader;
+import com.javainuse.step.Writer;
+
+@Configuration
+public class BatchConfig {
+
+	@Autowired
+	public JobBuilderFactory jobBuilderFactory;
+
+	@Autowired
+	public StepBuilderFactory stepBuilderFactory;
+
+	@Bean
+	public Job processJob() {
+		return jobBuilderFactory.get("processJob")
+				.incrementer(new RunIdIncrementer()).listener(listener())
+				.flow(orderStep1()).end().build();
+	}
+
+	@Bean
+	public Step orderStep1() {
+		return stepBuilderFactory.get("orderStep1").<String, String> chunk(1)
+				.reader(new Reader()).processor(new Processor())
+				.writer(new Writer()).build();
+	}
+
+	@Bean
+	public JobExecutionListener listener() {
+		return new JobCompletionListener();
+	}
+
+}
+```
+
+Define the class implementing the spring batch ItemReader interface as follows-
+
+
+```
+package com.javainuse.step;
+
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.NonTransientResourceException;
+import org.springframework.batch.item.ParseException;
+import org.springframework.batch.item.UnexpectedInputException;
+
+public class Reader implements ItemReader<String> {
+
+	private String[] messages = { "javainuse.com",
+			"Welcome to Spring Batch Example",
+			"We use H2 Database for this example" };
+
+	private int count = 0;
+
+	@Override
+	public String read() throws Exception, UnexpectedInputException,
+			ParseException, NonTransientResourceException {
+
+		if (count < messages.length) {
+			return messages[count++];
+		} else {
+			count = 0;
+		}
+		return null;
+	}
+
+}
+
+```
+
+Define the class implementing the spring batch ItemProcessor interface as follows-
+
+```
+package com.javainuse.step;
+
+import org.springframework.batch.item.ItemProcessor;
+
+public class Processor implements ItemProcessor<String, String> {
+
+	@Override
+	public String process(String data) throws Exception {
+		return data.toUpperCase();
+	}
+
+}
+```
+
+Define the class implementing the spring batch ItemWriter interface as follows-
+
+```
+package com.javainuse.step;
+
+import java.util.List;
+
+import org.springframework.batch.item.ItemWriter;
+
+public class Writer implements ItemWriter<String> {
+
+	@Override
+	public void write(List<? extends String> messages) throws Exception {
+		for (String msg : messages) {
+			System.out.println("Writing the data " + msg);
+		}
+	}
+
+}
+```
+
+
+Define the Listener class that is executed when the job is finished. 
+
+```
+package com.javainuse.listener;
+
+import org.springframework.batch.core.BatchStatus;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.listener.JobExecutionListenerSupport;
+
+public class JobCompletionListener extends JobExecutionListenerSupport {
+
+	@Override
+	public void afterJob(JobExecution jobExecution) {
+		if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
+			System.out.println("BATCH JOB COMPLETED SUCCESSFULLY");
+		}
+	}
+
+}
+
+```
+
+Expose an API using the controller to invoke the Spring Batch Job. 
+
+```
+package com.javainuse.controller;
+ 
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+ 
+@RestController
+public class JobInvokerController {
+ 
+    @Autowired
+    JobLauncher jobLauncher;
+ 
+    @Autowired
+    Job processJob;
+ 
+    @RequestMapping("/invokejob")
+    public String handle() throws Exception {
+ 
+            JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
+                    .toJobParameters();
+            jobLauncher.run(processJob, jobParameters);
+ 
+        return "Batch job has been invoked";
+    }
+}
+
+```
+
+In the properties file define the h2 database as follows-
+
+```
+spring.datasource.url=jdbc:h2:file:./DB
+spring.jpa.properties.hibernate.hbm2ddl.auto=update
+spring.batch.job.enabled=false
+
+```
+
+
+Run the following Spring Boot class to start our application 
+
+```
+package com.javainuse;
+
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@EnableBatchProcessing
+public class SpringBatchApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBatchApplication.class, args);
+	}
+}
+
+```
+
+Go to url http://localhost:8080/invokejob, this will start the Batch Job.
+
+It should print in the web browser as "Batch job has been invoked".
+
+The you may check the IDE console.
+
+![Spring Boot patch processing](console.PNG?raw=true "How spring boot batch processing works")
+
+
+We now use the H2-console to see data in H2 database. Go to localhost:8080/h2-console/login.do.
+In the JDBC url use jdbc:h2:mem:testdb. Keep the password blank.Click on Connect. 
+
+We can see the spring batch meta data tables created here. 
+
+
+
+
+
+
+
