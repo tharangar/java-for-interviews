@@ -367,13 +367,16 @@ normal flow...
 
 ## Difference between throw and throws in Java
 
- No | throw | throws |
+#No | #throw | #throws 
+--- | --- | --- 
 | 1 | Java throw Keyword is used to explicitly throw an exception. | Java throws Keyword is used to declare an exception 
 --- | --- | --- 
-| 2 | Checked exception cannot be propagated using throw only | Checked exception can be propagated with throws |
-|3 | throw is followed by an instance. | throws is followed by class. |
-| 4 | throw is used within the method. | thows is used with the method signature. |
-| 5 | You cannot throw multiple exceptions. | You can declare multiple exceptions e.g.  public coid method()throws IOException, SQLException. |
+ 2 | Checked exception cannot be propagated using throw only | Checked exception can be propagated with --- | --- | --- | --- 
+ 3 | throw is followed by an instance. | throws is followed by class. 
+--- | --- | --- 
+ 4 | throw is used within the method. | thows is used with the method signature. 
+--- | --- | --- 
+ 5 | You cannot throw multiple exceptions. | You can declare multiple exceptions e.g.  public coid method()throws IOException, SQLException. 
 
 
 
