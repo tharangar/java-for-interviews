@@ -12,6 +12,8 @@ The java.lang.Throwable class is the root class of Java Exception hierarchy whic
 
 ![Hierarchy of Java Excepton classes](one.PNG?raw=true "Hierarchy")
 
+![Spring Boot Actuator ](images/actuator.PNG?raw=true "ACTUATOR")
+
 
 There are mainly two types of exceptions: checked and unchecked. Here, an error is considered as the unchecked exception. According to Oracle, there are three types of exceptions:
 
@@ -70,5 +72,11 @@ Let's see an example of Java Exception Handling where we using a try-catch state
 
 ```
 
+In this example, we handle the generated exception (Arithmetic Exception) with a different type of exception class (ArrayIndexOutOfBoundsException).
 
+
+```
+
+
+```
 
