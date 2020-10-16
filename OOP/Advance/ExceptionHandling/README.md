@@ -223,3 +223,156 @@ output
 Output:finally block is always executed
        Exception in thread main java.lang.ArithmeticException:/ by zero
 ```
+
+## Java Throw Keyworkd
+
+The Java throw keyword is used to explicitly throw an exception.
+
+We can throw either checked or uncheked exception in java by throw keyword. The throw keyword is mainly used to throw custom exception. We will see custom exceptions later.
+
+The syntax of java throw keyword is given below. In this example, we have created the validate method that takes integer value as a parameter. If the age is less than 18, we are throwing the ArithmeticException otherwise print a message welcome to vote.
+
+```
+    public class TestThrow1{  
+       static void validate(int age){  
+         if(age<18)  
+          throw new ArithmeticException("not valid");  
+         else  
+          System.out.println("welcome to vote");  
+       }  
+       public static void main(String args[]){  
+          validate(13);  
+          System.out.println("rest of the code...");  
+      }  
+    }  
+
+```
+
+## Java Exception Propagation
+
+An exception is first thrown from the top of the stack and if it is not caught, it drops down the call stack to the previous method,If not caught there, the exception again drops down to the previous method, and so on until they are caught or until they reach the very bottom of the call stack.This is called exception propagation. 
+
+Ex : 
+
+```
+    class TestExceptionPropagation1{  
+      void m(){  
+        int data=50/0;  
+      }  
+      void n(){  
+        m();  
+      }  
+      void p(){  
+       try{  
+        n();  
+       }catch(Exception e){System.out.println("exception handled");}  
+      }  
+      public static void main(String args[]){  
+       TestExceptionPropagation1 obj=new TestExceptionPropagation1();  
+       obj.p();  
+       System.out.println("normal flow...");  
+      }  
+    }  
+```
+output
+
+```
+Output:exception handled
+       normal flow...
+
+```
+
+But if we throw a exceoption from method m it will not be propaagted to above layes, so there will be a Compile error as shown in bellow example.
+
+
+```
+    class TestExceptionPropagation2{  
+      void m(){  
+        throw new java.io.IOException("device error");//checked exception  
+      }  
+      void n(){  
+        m();  
+      }  
+      void p(){  
+       try{  
+        n();  
+       }catch(Exception e){System.out.println("exception handeled");}  
+      }  
+      public static void main(String args[]){  
+       TestExceptionPropagation2 obj=new TestExceptionPropagation2();  
+       obj.p();  
+       System.out.println("normal flow");  
+      }  
+    }  
+
+```
+output : Output:Compile Time Error
+
+
+## Throws Keyword
+
+
+The Java throws keyword is used to declare an exception. It gives an information to the programmer that there may occur an exception so it is better for the programmer to provide the exception handling code so that normal flow can be maintained.
+
+Exception Handling is mainly used to handle the checked exceptions. If there occurs any unchecked exception such as NullPointerException, it is programmers fault that he is not performing check up before the code being used. Which exception should be declared. checked exceptions only becouse.
+
+* unchecked Exception under programmer control so correct the code.
+* errors beyond programmers control.
+
+
+```
+return_type method_name() throws exception_class_name{  
+//method code  
+}
+
+```
+
+### Advantages of Java throws keyword.
+
+Now Checked Exception can be propagated (forwarded in call stack). 
+It provides information to the caller of the mehtod about the exception.
+
+
+```
+    import java.io.IOException;  
+    class Testthrows1{  
+      void m()throws IOException{  
+        throw new IOException("device error");//checked exception  
+      }  
+      void n()throws IOException{  
+        m();  
+      }  
+      void p(){  
+       try{  
+        n();  
+       }catch(Exception e){System.out.println("exception handled");}  
+      }  
+      public static void main(String args[]){  
+       Testthrows1 obj=new Testthrows1();  
+       obj.p();  
+       System.out.println("normal flow...");  
+      }  
+    }  
+
+```
+
+Output :
+
+```
+exception handled
+normal flow...
+
+```
+
+
+## Difference between throw and throws in Java
+
+| No | throw | throws |
+| 1 | Java throw Keyword is used to explicitly throw an exception. | Java throws Keyword is used to declare an exception |
+| 2 | Checked exception cannot be propagated using throw only | Checked exception can be propagated with throws |
+|3 | throw is followed by an instance. | throws is followed by class. |
+| 4 | throw is used within the method. | thows is used with the method signature. |
+| 5 | You cannot throw multiple exceptions. | You can declare multiple exceptions e.g.  public coid method()throws IOException, SQLException. |
+
+
+
