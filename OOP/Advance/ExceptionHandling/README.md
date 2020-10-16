@@ -72,11 +72,154 @@ Let's see an example of Java Exception Handling where we using a try-catch state
 
 ```
 
+How Exception works in JVM and java application.
+
+![Hierarchy of Java Excepton classes](two.PNG?raw=true "Hierarchy")
+
+
 In this example, we handle the generated exception (Arithmetic Exception) with a different type of exception class (ArrayIndexOutOfBoundsException).
 
 
 ```
-
+    public class TryCatchExample8 {  
+      
+        public static void main(String[] args) {  
+            try  
+            {  
+            int data=50/0; //may throw exception   
+      
+            }  
+                // try to handle the ArithmeticException using ArrayIndexOutOfBoundsException  
+            catch(ArrayIndexOutOfBoundsException e)  
+            {  
+                System.out.println(e);  
+            }  
+            System.out.println("rest of the code");  
+        }  
+          
+    }  
 
 ```
 
+Output :
+
+```
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+
+```
+
+## Java catch multiple exceptions.
+
+A try block can be followed by one or more catch blocks. Each catch block must contain a different exception handler. So, if you have to perform different tasks at the occurrence of different exceptions, use java multi-catch block.
+
+* At a time only one exception occurs and at a time only one catch block is executed.
+
+* All catch blocks must be ordered from most specific to most general, i.e. catch for ArithmeticException must come before catch for Exception.
+
+if handle the exception without maintaining the order of exceptions (i.e. from most specific to most general) there will be a compile error.
+
+In this example, we generate NullPointerException, but didn't provide the corresponding exception type. In such case, the catch block containing the parent exception class Exception will invoked.
+
+```
+
+    public class MultipleCatchBlock4 {  
+      
+        public static void main(String[] args) {  
+              
+               try{    
+                    String s=null;  
+                    System.out.println(s.length());  
+                   }    
+                   catch(ArithmeticException e)  
+                      {  
+                       System.out.println("Arithmetic Exception occurs");  
+                      }    
+                   catch(ArrayIndexOutOfBoundsException e)  
+                      {  
+                       System.out.println("ArrayIndexOutOfBounds Exception occurs");  
+                      }    
+                   catch(Exception e)  
+                      {  
+                       System.out.println("Parent Exception occurs");  
+                      }             
+                   System.out.println("rest of the code");    
+        }  
+    }  
+```
+
+Result :
+
+```
+Parent Exception occurs
+rest of the code
+```
+
+## Java Nested Try block.
+
+
+Sometimes a situation may arise where a part of a block may cause one error and the entire block itself may cause another error. In such cases, exception handlers have to be nested.
+
+
+```
+    class Excep6{  
+     public static void main(String args[]){  
+      try{  
+        try{  
+         System.out.println("going to divide");  
+         int b =39/0;  
+        }catch(ArithmeticException e){System.out.println(e);}  
+       
+        try{  
+        int a[]=new int[5];  
+        a[5]=4;  
+        }catch(ArrayIndexOutOfBoundsException e){System.out.println(e);}  
+         
+        System.out.println("other statement);  
+      }catch(Exception e){System.out.println("handeled");}  
+      
+      System.out.println("normal flow..");  
+     }  
+    }  
+
+```
+
+
+## Finally Block in Exception Handling.
+
+
+
+Java finally block is a block that is used to execute important code such as closing connection, stream etc.
+
+Java finally block is always executed whether exception is handled or not.
+
+Java finally block follows try or catch block.
+
+Finally block in java can be used to put "cleanup" code such as closing a file, closing connection etc.
+
+
+![Finaly block](finaly.PNG?raw=true "Finaly Block")
+
+Excpetion found or not finaly block will be executed.
+
+
+```
+    class TestFinallyBlock1{  
+      public static void main(String args[]){  
+      try{  
+       int data=25/0;  
+       System.out.println(data);  
+      }  
+      catch(NullPointerException e){System.out.println(e);}  
+      finally{System.out.println("finally block is always executed");}  
+      System.out.println("rest of the code...");  
+      }  
+    }  
+
+```
+
+output
+
+```
+Output:finally block is always executed
+       Exception in thread main java.lang.ArithmeticException:/ by zero
+```
