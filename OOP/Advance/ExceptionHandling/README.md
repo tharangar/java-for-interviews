@@ -380,4 +380,330 @@ normal flow...
  5 | You cannot throw multiple exceptions. | You can declare multiple exceptions e.g.  public coid method()throws IOException, SQLException. 
 
 
+Java throw and throws example.
+
+```
+    void m()throws ArithmeticException{  
+    throw new ArithmeticException("sorry");  
+    }  
+```
+
+
+##  Difference between final, finally and finalize.
+
+There are many differences between final, finally and finalize. A list of differences between final, finally and finalize are given below
+
+
+No | final | finally | finalize
+--- | --- | --- | ---
+1 | Final is used to apply restrictions on classs, method and variable. Final class can't be inherited, final method cant be ovverrden and final variable value cant be changed. | finally is used to place important code, it will be executed whether exception is handled or not. | finalize is used to perform clean up processing just before object is garbage collected. 
+ --- | --- | --- | ---
+  2 | final is a key word | final isa block | finalize is a method 
+
+
+
+#### final example
+
+```
+    class FinalExample{  
+    public static void main(String[] args){  
+    final int x=100;  
+    x=200;//Compile Time Error  
+    }}  
+```
+
+#### finally example
+
+```
+    class FinallyExample{  
+    public static void main(String[] args){  
+    try{  
+    int x=300;  
+    }catch(Exception e){System.out.println(e);}  
+    finally{System.out.println("finally block is executed");}  
+    }}  
+
+```
+
+#### finalize example
+
+
+```
+class FinalizeExample{  
+public void finalize(){System.out.println("finalize called");}  
+public static void main(String[] args){  
+FinalizeExample f1=new FinalizeExample();  
+FinalizeExample f2=new FinalizeExample();  
+f1=null;  
+f2=null;  
+System.gc();  
+}} 
+
+```
+
+
+## Exception Handling with Method overriding in Java.
+
+There are many rules if we talk about methodoverriding with exception handling. The Rules are as follows:
+
+*    If the superclass method does not declare an exception
+        If the superclass method does not declare an exception, subclass overridden method cannot declare the checked exception but it can declare unchecked exception.
+
+*    If the superclass method declares an exception
+        If the superclass method declares an exception, subclass overridden method can declare same, subclass exception or no exception but cannot declare parent exception.
+
+
+Samples.
+
+#### If Supper class method does not declare an exception.
+
+```
+    import java.io.*;  
+    class Parent{  
+      void msg(){System.out.println("parent");}  
+    }  
+      
+    class TestExceptionChild extends Parent{  
+      void msg()throws IOException{  
+        System.out.println("TestExceptionChild");  
+      }  
+      public static void main(String args[]){  
+       Parent p=new TestExceptionChild();  
+       p.msg();  
+      }  
+    }  
+```
+
+This will give an compile error due to 1) Rule: If the superclass method does not declare an exception, subclass overridden method cannot declare the checked exception.
+
+output :
+
+```
+Output:Compile Time Error
+```
+
+Example 2
+
+2) Rule: If the superclass method does not declare an exception, subclass overridden method cannot declare the checked exception but can declare unchecked exception. 
+
+```
+    import java.io.*;  
+    class Parent{  
+      void msg(){System.out.println("parent");}  
+    }  
+      
+    class TestExceptionChild1 extends Parent{  
+      void msg()throws ArithmeticException{  
+        System.out.println("child");  
+      }  
+      public static void main(String args[]){  
+       Parent p=new TestExceptionChild1();  
+       p.msg();  
+      }  
+    }  
+```
+
+output :
+```
+Output:child
+
+```
+
+
+#### If the superclass method declares an exception
+
+1) Rule: If the superclass method declares an exception, subclass overridden method can declare same, subclass exception or no exception but cannot declare parent exception. 
+
+Sample : Example in case subclass overridden method declares parent exception.
+
+```
+    import java.io.*;  
+    class Parent{  
+      void msg()throws ArithmeticException{System.out.println("parent");}  
+    }  
+      
+    class TestExceptionChild2 extends Parent{  
+      void msg()throws Exception{System.out.println("child");}  
+      
+      public static void main(String args[]){  
+       Parent p=new TestExceptionChild2();  
+       try{  
+       p.msg();  
+       }catch(Exception e){}  
+      }  
+    }  
+```
+
+Above will give a compile error becouse overridden mehtod is declaring parent exception of supper class method exception's.
+
+
+Example in case subclass overridden mehtod declares same execption.
+
+```
+    import java.io.*;  
+    class Parent{  
+      void msg()throws Exception{System.out.println("parent");}  
+    }  
+      
+    class TestExceptionChild3 extends Parent{  
+      void msg()throws Exception{System.out.println("child");}  
+      
+      public static void main(String args[]){  
+       Parent p=new TestExceptionChild3();  
+       try{  
+       p.msg();  
+       }catch(Exception e){}  
+      }  
+    }  
+
+```
+
+Out put is : child.  
+
+Above senario is possible.
+
+
+Example in case subclass overridden method declares subclass exception.
+
+```
+    import java.io.*;  
+    class Parent{  
+      void msg()throws Exception{System.out.println("parent");}  
+    }  
+      
+    class TestExceptionChild4 extends Parent{  
+      void msg()throws ArithmeticException{System.out.println("child");}  
+      
+      public static void main(String args[]){  
+       Parent p=new TestExceptionChild4();  
+       try{  
+       p.msg();  
+       }catch(Exception e){}  
+      }  
+    }  
+
+```
+
+Output : child
+
+This senario is allowed.
+
+
+Example in case subclass overridden method declare no exception.
+
+```
+    import java.io.*;  
+    class Parent{  
+      void msg()throws Exception{System.out.println("parent");}  
+    }  
+      
+    class TestExceptionChild5 extends Parent{  
+      void msg(){System.out.println("child");}  
+      
+      public static void main(String args[]){  
+       Parent p=new TestExceptionChild5();  
+       try{  
+       p.msg();  
+       }catch(Exception e){}  
+      }  
+    }  
+```
+
+Output :child
+
+
+
+## JAVA Custom Exception.
+
+If you are creating your own Exception that is known as custom exception or user-defined exception. Java custom exceptions are used to customize the exception according to user need.
+
+By the help of custom exception, you can have your own exception and message.
+
+Let's see a simple example of java custom exception.
+
+
+```
+    class InvalidAgeException extends Exception{  
+     InvalidAgeException(String s){  
+      super(s);  
+     }  
+    }  
+
+
+    class TestCustomException1{  
+      
+       static void validate(int age)throws InvalidAgeException{  
+         if(age<18)  
+          throw new InvalidAgeException("not valid");  
+         else  
+          System.out.println("welcome to vote");  
+       }  
+         
+       public static void main(String args[]){  
+          try{  
+          validate(13);  
+          }catch(Exception m){System.out.println("Exception occured: "+m);}  
+      
+          System.out.println("rest of the code...");  
+      }  
+    }  
+
+
+```
+
+
+How this senario is used in industrial applicaiton can be shown as bellow.
+
+
+package biz.nable.sb.cor.common.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import biz.nable.sb.cor.common.utility.ErrorCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@ResponseStatus(code = HttpStatus.NOT_FOUND)
+@Getter
+@Setter
+public class RecordNotFoundException extends RuntimeException {
+
+	private static final long serialVersionUID = 1L;
+	private final String errorCode;
+
+	public RecordNotFoundException(String message) {
+		super(message);
+		this.errorCode = ErrorCode.UNKNOWN_ERROR;
+	}
+
+	public RecordNotFoundException(String message, String errorCode) {
+		super(message);
+		this.errorCode = errorCode;
+	}
+
+	public RecordNotFoundException(String message, Throwable cause, String errorCode) {
+		super(message, cause);
+		this.errorCode = errorCode;
+	}
+
+}
+
+```
+
+
+Then it can be thrown from other methods.
+
+
+```
+
+		} else {
+			String msg = messageSource.getMessage(ErrorCode.NO_TEMP_RECORD_FOUND, null,
+					LocaleContextHolder.getLocale());
+			logger.error(msg);
+			throw new RecordNotFoundException(msg, ErrorCode.NO_TEMP_RECORD_FOUND);
+		}
+
+```
+
 
