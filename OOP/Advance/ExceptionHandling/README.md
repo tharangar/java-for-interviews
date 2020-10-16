@@ -654,7 +654,7 @@ Let's see a simple example of java custom exception.
 
 How this senario is used in industrial applicaiton can be shown as bellow.
 
-
+```
 package biz.nable.sb.cor.common.exception;
 
 import org.springframework.http.HttpStatus;
