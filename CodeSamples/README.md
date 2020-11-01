@@ -90,3 +90,39 @@ Then it can be thrown from other methods.
 
 ```
 
+
+
+## Beanutil copy object to another.
+
+https://www.baeldung.com/apache-commons-beanutils
+
+
+If you want to copy from searchContent to content, then code should be as follows
+
+```
+BeanUtils.copyProperties(content, searchContent);
+```
+
+You need to reverse the parameters as above in your code.
+
+From API,
+
+```
+public static void copyProperties(Object dest, Object orig)
+                           throws IllegalAccessException,
+                                  InvocationTargetException)
+```
+
+Parameters
+
+
+    dest - Destination bean whose properties are modified
+
+    orig - Origin bean whose properties are retrieved
+
+Just a note for sanity's sake... Apache and Spring both have a BeanUtils class with a copyProperties method and they accept their parameters in opposite order. Apache's is BeanUtils.copyProperties(target, source) and Spring's is BeanUtils.copyProperties(source,target).
+
+You can also trace the method of copyProperties and it should show you the param order, source vs target. This is for spring, public static void copyProperties(java.lang.Object source, java.lang.Object target)
+
+
+Further Refference : https://www.baeldung.com/apache-commons-beanutils
