@@ -482,3 +482,10 @@ Ajay
 Ravi
 Vijay
 ```
+
+
+
+## Comperable and Comparator 
+
+https://beginnersbook.com/2013/12/java-arraylist-of-object-sort-example-comparable-and-comparator/
+
