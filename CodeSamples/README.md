@@ -125,6 +125,42 @@ Just a note for sanity's sake... Apache and Spring both have a BeanUtils class w
 You can also trace the method of copyProperties and it should show you the param order, source vs target. This is for spring, public static void copyProperties(java.lang.Object source, java.lang.Object target)
 
 
+Sample :
+
+```
+	public EpfEtfRequestHistory convertToEPFETFRequestToHistory(EpfEtfRequest epfetfRequest) {
+
+		EpfEtfRequestHistory epfetfHistoryEntity = new EpfEtfRequestHistory();
+
+		// copy workflow selection basic data tothe history table.
+		try {
+			// if there is no this new converter registraion errors may occure when data
+			// values are trying to convert to null.
+			java.util.Date defaultValue = null;
+			Converter converter = new DateConverter(defaultValue);
+			BeanUtilsBean beanUtilsBean = BeanUtilsBean.getInstance();
+			beanUtilsBean.getConvertUtils().register(converter, java.util.Date.class);
+			beanUtilsBean.copyProperties(epfetfHistoryEntity, epfetfRequest);
+	
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// create the full object to a map and set to the payloand.
+		//groupHistory.setRequestPayload(commonConverter.pojoToMap(groups));
+
+		return epfetfHistoryEntity;
+
+	}
+
+```
+
 Further Refference : https://www.baeldung.com/apache-commons-beanutils
 
 
@@ -204,4 +240,64 @@ https://stackoverflow.com/questions/4216745/java-string-to-date-conversion
 Combining JPA And/Or Criteria Predicates.
 
 The JPA Criteria API can be used to easily add multiple AND/OR conditions when querying records in a database.
+
+With predicates
+
+https://www.baeldung.com/jpa-and-or-criteria-predicates
+
+In this tutorial, we used the JPA Criteria API to implement use cases where we needed to combine AND/OR predicates.
+
+As usual, the complete source code used for this tutorial is over on GitHub.
+
+1. Overview
+
+The JPA Criteria API can be used to easily add multiple AND/OR conditions when querying records in a database. In this tutorial, we'll explore a quick example of JPA criteria queries that combine multiple AND/OR predicates.
+
+If you're not familiar with predicates, we suggest reading about the basic JPA criteria queries first.
+
+For our examples, we'll consider an inventory of Item entities, each having an id, name, color, and grade:
+
+```
+@Entity
+public class Item {
+
+    @Id
+    private Long id;
+    private String color;
+    private String grade;
+    private String name;
+    
+    // standard getters and setters
+}
+```
+
+3. Combining Two OR Predicates Using an AND Predicate
+
+Let's consider the use case where we need to find items having both:
+
+    red or blue color
+    AND
+    A or B grade
+
+We can easily do this using JPA Criteria API's and() and or() compound predicates.
+
+To begin, let's set up our query:
+
+```
+CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+CriteriaQuery<Item> criteriaQuery = criteriaBuilder.createQuery(Item.class);
+Root<Item> itemRoot = criteriaQuery.from(Item.class);
+```
+
+Now, we'll need to build a Predicate to find items having a blue or a red color:
+
+```
+Predicate predicateForBlueColor
+  = criteriaBuilder.equal(itemRoot.get("color"), "blue");
+Predicate predicateForRedColor
+  = criteriaBuilder.equal(itemRoot.get("color"), "red");
+Predicate predicateForColor
+  = criteriaBuilder.or(predicateForBlueColor, predicateForRedColor);
+```
+
 

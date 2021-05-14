@@ -6,6 +6,14 @@ Java Collections can achieve all the operations that you perform on a data such 
 
 Java Collection means a single unit of objects. Java Collection framework provides many interfaces (Set, List, Queue, Deque) and classes (ArrayList, Vector, LinkedList, PriorityQueue, HashSet, LinkedHashSet, TreeSet).
 
+
+Java Collections Framework  is one of the core parts of Java programming language.
+
+We dont want to be expert in defferent data structures and their algorithms.
+
+Collections are used in almost every programming language.
+
+
 ### What is Collection in Java
 
 A Collection represents a single unit of objects, i.e., a group.
