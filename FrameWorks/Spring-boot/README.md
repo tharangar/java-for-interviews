@@ -225,3 +225,47 @@ Enable the access through web.
 
 
 ![Spring Boot Actuator ](images/enableActuator.PNG?raw=true "ENABLE ACTUATOR")
+
+
+
+## FORMAT DATE AND TIME AND TIME ZONE in DTOs
+
+In spring boot applications we use DTO s as response objects. Those are converted to json by Spring.jackson libry.
+
+So if you want to change each date time in Data fields you may use following anotation above the field.
+
+```
+@JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Kolkata")
+private Date insertionTime;
+
+```
+
+
+But suppose you want to set date time and zone for the service without updating in each dto for fields one by one, easily you can do as follows.
+
+https://www.baeldung.com/spring-boot-formatting-json-dates
+
+Above url describe defferent ways we can do it.
+
+
+Configuring the Default Format
+
+And while @JsonFormat is powerful on its own, hardcoding the format and timezone can bite us down the road.
+
+If we want to configure a default format for all dates in our application, a more flexible way is to configure it in application.properties:
+
+spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
+
+And if we want to use a specific time zone in our JSON dates, there's also a property for that:
+
+spring.jackson.time-zone=Europe/Zagreb
+
+Although setting the default format like this is quite handy and straightforward, there's a drawback to this approach. Unfortunately, it doesn't work with the Java 8 date types, like LocalDate and LocalDateTime – we can use it only to format fields of the type java.util.Date or the java.util.Calendar. There is hope, though, as we'll soon see.
+
+```
+
+# Date time format configuration
+spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
+spring.jackson.time-zone=Asia/Kolkata
+
+```
