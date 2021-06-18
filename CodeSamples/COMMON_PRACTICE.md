@@ -282,10 +282,11 @@ private Date insertionTime;
 
 But recomanded way in our services is to configure property file as follows.
 
+```
 # Date time format configuration
 spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
 spring.jackson.time-zone=Asia/Kolkata
-
+```
 
 
 ## 6. Reffernce.
@@ -293,9 +294,14 @@ spring.jackson.time-zone=Asia/Kolkata
 Always reffer  Java Design document, ISD and FRS before you start the work.
 
 
-## 7. Your own time table
+## 7. Your own time planner
 
 Have a own planner .  Other wise we will miss our important tasks and we dont have any understanding on our effort. Allocate at least 1h for learning process.
+
+At least 0.5 h for your project managment . check remaining tasks and are you on track to complete the sprint.
+
+At least 7 h of full focus working time periods for task completion.
+
 
 
 ![Alt text](calender.PNG?raw=true "Simple Planner")
