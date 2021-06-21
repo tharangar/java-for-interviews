@@ -288,6 +288,108 @@ spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
 spring.jackson.time-zone=Asia/Kolkata
 ```
 
+## 6. Collection Iteration
+
+Collection Iterations are requried for performin various operationsin . But useing a for loop is the basic and simplest method but it's performance is poor. Using stream is the latest technics and lets check possible solutions for colleciton iteration.
+
+Available methods to Iterating list of object 
+
+1. For loop  : Simple but performance is poor
+
+```
+int maxNumber = 10
+ArrayList<Integer> list = new ArrayList<Integer>(maxNumber);
+for (int item =1; item  <= maxNumber ; item++){
+    list.add (item);
+}
+
+```
+
+2. collection forEach loop
+
+```
+List<Integer> numberList = getListOfNumbers(100000000);
+Long forEachSum = 0L;
+LongAdder sequen 
+
+```
+
+Stream
+
+![Streams ](stream.PNG?raw=true "Stream")
+
+
+
+3. Sequenctial Stream
+
+Above images has taken 4 core system.
+Sequencial stream takes one core and do iterations one after another. Permonce is poor with respect to parallel strams. It execute maintaining the order.
+
+```
+    LongAdder sequentialStreamSum = new LongAdder();
+    List<Integer> numberList = getListOfNumbers(100000000);
+    numberList.stream().forEach()(sequenctialStramSum::add); // this add is add metod in LongAdder class
+
+```
+
+4. Parallel Stream
+Parallel stram uses multiple cores when resources available. So performance wise parallel strams is ahead.
+Ex : if you want to send email 10000 users. in such cases parallel strams is better than sequencial strams.
+No any order is maintained. So the order of items is not imporatant for operations we can use parallelStrams.
+
+```
+    LongAdder parallaStreamSum = new LongAdder();
+    List<Integer> numberList = getListOfNumbers(100000000);
+    numberList.parallelStream().forEach()(parallaStreamSum::add); // this add is add metod in LongAdder class
+
+```
+
+We can measure time taken for each of cases by using java callender option
+
+Calendar startTime = Calendar.getInstance();
+
+// doing codes
+
+Calendar endTime = Calendar.getInstance();
+
+System.out.println(endtTime.getTimeInMillies() - startTime.getTimeInMillies());
+
+
+
+
+## 7. Corporate Approval Process
+
+### Auth pending
+
+When looking at Auth pending objects there should be a current object and modified object and audit details along with required parameter for approval process (Dual authenticaiton approval data or  Workflow side Assign data). Current or modified objects can be taken from the temp tables which all module has , from  ORIGINAL_PAYLOADS and REQIEST_PAYLOADS.
+This API is provided for approvers to approve corporate requests.
+
+#### NEW_PENDING
+
+current object : null for new request. but if it is a new_request modificaiton by the enterer then current object is not null and it has the master data value.
+
+modified object : only requried parameters should be exposed through ESB. ( Audit details not shown under modified object even though audit details are added to the payload before save. )
+
+audit details : To be taken from modified object.
+
+
+#### MODIFY_PENDING, DELETE_PENDING
+
+current object : currently active object in master tables
+
+modified object : submited changes by user . ( Do not expose audit details through ESB even though those are updated in the payload)
+
+audit details :  In ESB audit details of modified object should be exposed .
+
+
+
+### Entere view
+
+Enterer view is provided to request submitted users to view submitted requests. It should have the changes he requested clearly along with audit details.
+
+It also should have current and modified object as we considered in auth pending. Further it should have a parameter to retrive audit details from audit trail.
+
+
 
 ## 6. Reffernce.
 
@@ -305,5 +407,6 @@ At least 7 h of full focus working time periods for task completion.
 
 
 ![Alt text](calender.PNG?raw=true "Simple Planner")
+
 
 

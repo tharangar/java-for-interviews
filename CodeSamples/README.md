@@ -233,6 +233,34 @@ https://stackoverflow.com/questions/4216745/java-string-to-date-conversion
 
 
 
+## Get the day number of days after specific dats.
+
+In following example it gets the date adding number of days to it.
+
+```
+class ScratchBook {
+    private static DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    public static Date getDate(int days) { //modified to use Calendar
+        Calendar cal = Calendar.getInstance();
+        cal.set(1900, Calendar.JANUARY, 1);
+        cal.add(Calendar.DATE, days);
+        return cal.getTime();
+    }
+    public static String getDateString(int days) {
+        return formatter.format(getDate(days));
+    }
+    public static void showConversion(int days) {
+        System.out.println(days + " days after 01/01/1900 = " + getDateString(days));
+    }
+    public static void main(String[] s) {
+        showConversion(0);
+        showConversion(1);
+        showConversion(365);
+        showConversion(37106);
+    }
+}
+```
+
 ## Hibernate and quering
 
 ### Criteria Builder 
