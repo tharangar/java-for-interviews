@@ -59,21 +59,21 @@ companyId : nable
 
 ```json
 
-tags to be used
+// Defferent tags to be used for defferent content
 
-```
-    normal codes
-```
+//```
+//    normal codes
+//```
 
-```json
-    json payloads
+//```json
+//   json payload
+//```
 
-```
+//```xml
+//    xml payloads
+//```
 
-```xml
-    xml payloads
-```
-
+// Finaly out put will be seen as follows.
 
 {
      
