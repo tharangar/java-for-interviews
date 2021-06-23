@@ -1,5 +1,5 @@
 
-# COMMON PRACTICE TO DEVELOP SPRING BOOT APPLICATIONS
+# COMMON PRACTICE TO DEVELOP SPRING BOOT SERVICES
 
 
 ## 1. Regular comments
@@ -222,7 +222,7 @@ The idea here is to stamp each request with a unique id using SLF4J’s MDC. And
 
 
 ```
-// =======================================================================================
+    // =======================================================================================
 	// AUTHPENDING : APPROVER VIEW (USED FOR AUTHPENDING APIs MODULE VISE )
 	// - For Getting Pending requests
 	//
@@ -284,7 +284,8 @@ But recomanded way in our services is to configure property file as follows.
 
 ```
 # Date time format configuration
-spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
+# Issues came when there are defferent time format used early when retrive data 
+# spring.jackson.date-format=yyyy-MM-dd HH:mm:ss   
 spring.jackson.time-zone=Asia/Kolkata
 ```
 
@@ -389,14 +390,450 @@ Enterer view is provided to request submitted users to view submitted requests. 
 
 It also should have current and modified object as we considered in auth pending. Further it should have a parameter to retrive audit details from audit trail.
 
+## 8. Using lombok.
+
+Lombok libry will add Getters, Setters , builder, constructior , hashcode and toString methods to model classes.
+https://www.youtube.com/watch?v=GBNZMvaHHOk
 
 
-## 6. Reffernce.
+@Getter : create all getters. we cna define access level also
+Ex : @Getter(AccessLevel.PRIVATE);
+If we put AccessLevel.NONE then field will not be accessible.
+
+Reffer above video to get good understanding how it works.
+
+But we found issues when we use @ToString anotation from lombok and use it from logs in cases which we have
+parenet and child model classes and both are having lombok @ToString  anotations. (Due to a infinite loop).
+
+In such cases we have to override toStirng in such cases.
+
+
+## 9. Java 8 New Features.
+
+1.  Lambda Expression
+
+Suppose you need to change this method to lambda expressin
+
+ ```
+ public void m1(){
+     sop("Hello");
+ }
+
+```
+Lambda expression are annonimus ( no name), no return type , no modified.
+
+() -> {
+    sop("Hello);
+}
+
+
+or  
+
+() - > sop("Hellow");
+
+EX  :2
+
+```
+public void sum(int a, int b){
+    sop(a+b);
+}
+```
+
+(int a, int b) -> {sop(a+b);}
+
+OR
+
+input types will be automatically set by the compiler
+
+(a, b ) - > sop(a+b);
+
+Ex : 3
+
+```
+public int m1(String s){
+    return  s.length();
+}
+```
+
+(String s) -> {return s.length();}
+
+Defferent ways to optimize lambda expressions
+
+if we have only single line we can represt it as follows with input type removal and when only one input available.
+
+s - > s.length();
+
+
+
+2. Java 8 double colon (::) operator.
+
+The double colon (::) operator is known as the method reference in Java 8. Method references are expressions which have the same treatment as a lambda expression, but instead of providing a lambda body, they refer to an existing method by name. This can make your code more readable and concise.
+
+Read more: https://www.java67.com/2018/06/what-is-double-colon-operator-in-java-8.html#ixzz6yVNruv00
+
+For example, to print all elements of the list, you can use the forEach() method as follows
+
+list.stream.forEach( s-> System.out.println(s));
+
+
+but here you can replace lambda expression with method reference to improve readability as shown below:
+
+list.stream.forEach( System.out::println);
+
+You can use method reference or double colon operator to refer to a static method, an instance method, or a constructor. For referring a static method, you can either use className or instanceRef, but to refer to an instance method of a particular object, you need to use instanceRef.
+
+
+Where can you use the double colon operator in Java?
+You can use the double colon operator (::) wherever you need to use the method reference.  Here are some examples of a method reference in Java 8:
+A static method (ClassName::methodName) like Person::getAge
+An instance method of a particular object (instanceRef::methodName) like System.out::println
+A super method of a particular object (super::methodName)
+An instance method of an arbitrary object of a particular type (ClassName::methodName)
+A class constructor reference (ClassName::new) like ArrayList::new
+An array constructor reference (TypeName[]::new) like String[]::new 
+
+The idea is that if you are passing a lambda expression, like a function that takes a value and prints in the console then instead of giving lambda expression, just pass the println() method of PrintStream class which you can access as System.out::println.
+
+Remember, there is no parenthesis when you refer to a method using method reference or lambda expression in Java 8. 
+
+Here is a real-world example of method reference using a double colon operator in Java 8. In this example, we are creating a Comparator which compares person by their age. In the first example, we have used a lambda expression to pass the logic to compare age, while in the second line of code, we have used a double colon operator or method reference.
+
+You can see that the second example is much more readable and clean:
+
+
+![Double colon lambda comparison ](dc.JPEG?raw=true "dc")
+
+
+
+
+3. Functional Interface
+
+The interface who contains only one abstract method but can have multiple default and static method is called functioanl interface.
+
+ex : 
+
+Runnable    --- >  run()
+Callable    --- >  call()
+Comparable  --- >  compareTo()
+Comparator  --- >  compare()
+
+Those interfaces have only one abstract method. So those interfaces are called funcation interfaces.
+Ex : runnable interface
+
+![Functional Interface ](runnable.PNG?raw=true "Runnable")
+
+
+We can write our own functional interfaces.
+
+Ex :
+
+```
+
+
+@FunctionalInterface   // This anotation is not mandatory. we can remove it
+public interface MyFunctionalInterface{
+
+// abstract method there can be only one abstract method this is equal to  public abstract void m1();
+
+void m1();
+
+
+// default methods  ( multiple default methods may have)
+default void m2(){
+    System.out.println("Default method 2");
+}
+
+default void m3(){
+    System.out.println("Default method 3");
+}
+
+
+// static method ( can have many static methods)
+static void m4(){
+    System.out.println("Static method");
+}
+
+
+}
+
+```
+
+
+Functional Interface with lambda expressions.
+
+
+Traditional Approach
+
+```
+interface Calculator{
+
+    void swithOn();
+}
+
+
+
+public class CalculatorImpl implements Calculator{
+
+    @Override
+    public void switchOn(){
+        System.out.println("Switch On");
+    }
+
+    public static void main(String args[]){
+
+    }
+
+}
+
+
+```
+
+
+Lambda expression based new apporch
+
+```
+interface Calculator{
+
+    void swithOn();
+}
+
+
+//  We can do it without implementing Calculator interface
+public class CalculatorImpl {
+
+
+    public static void main(String args[]){
+
+        Calculator calculator = () - > {
+            System.out.println("Swtich on");
+        };
+
+        calculator.switchOn();
+        
+    }
+
+}
+
+
+// We can simplify this due to method has only one line.
+
+public class CalculatorImpl2 {
+
+
+    public static void main(String args[]){
+
+        Calculator calculator = () - > System.out.println("Swtich on");
+
+        calculator.switchOn();
+        
+    }
+
+}
+
+```
+
+Advantage on lambda expression on Functional interface we can use less code.
+
+Another example with input.
+
+
+```
+interface Calculator{
+
+    void sum(int input);
+}
+
+public class CalculatorImpl {
+
+
+    public static void main(String args[]){
+
+        Calculator calculator = (input) - > System.out.println("sum :"+input);
+
+        calculator.sum(10);
+        
+    }
+
+}
+
+```
+
+
+If abstract method has return type
+
+
+```
+interface Calculator{
+
+    int subtract(int i1, int i2);
+}
+
+public class CalculatorImpl {
+
+
+    public static void main(String args[]){
+        // When there is no aditional bussiness logic
+        Calculator calculator = (i1,i2) - > i2-i1;
+
+        System.out.println(calculator.subtract(8,20));
+        
+    }
+
+}
+
+
+public class CalculatorImpl3 {
+
+
+    public static void main(String args[]){
+
+        Calculator calculator = (i1,i2) - > {
+            // When there is bussiness logic.
+            if(id2 > i1){
+            return i2-i1;
+            }
+        };
+        System.out.println(calculator.subtract(8,20));
+        
+    }
+
+}
+
+```
+
+
+4. Sorting
+
+Using the comparator is the eaiest method in sorting.
+
+Traditional Approach. -----------------------------------------------------------------------------
+
+```
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List:
+
+public class BookService(){
+
+    public List<Book> getBooksinSort(){
+        List<Book> books = new BookDAO().getBooks();
+        Collections.sort(books, new MyComparator());
+        return books;
+    }
+}
+
+public static void main(String[] args ){
+    System.out.println(new BookService().getBooksinSort());
+}
+
+
+// use one from bellow two class according to your requirment
+
+// if we want to get it from assending order
+class MyComparator implements Comparator<Book>{
+    @Override
+    public int compare(Book o1, Book o2){
+        return o1.getName().compareTo(o2.getName());
+    }
+}
+
+
+// if we want to get it from decending order
+class MyComparator implements Comparator<Book>{
+    @Override
+    public int compare(Book o1, Book o2){
+        return o2.getName().compareTo(o1.getName());
+    }
+}
+
+
+
+```
+
+
+
+Nested Comparator approach (Anonymous implementaion)  -------------------------------------------------
+
+
+```
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List:
+
+public class BookService(){
+
+    public List<Book> getBooksinSort(){
+        List<Book> books = new BookDAO().getBooks();
+
+
+        Collections.sort(books, new Comparator<Book>() {
+
+            @Override
+            public int compare(Book o1, Book o2){
+                return o2.getName().compareTo(o1.getName());
+            }
+
+
+        });
+
+
+        return books;
+    }
+
+
+public static void main(String[] args ){
+    System.out.println(new BookService().getBooksinSort());
+}
+
+
+}
+
+
+```
+
+
+Approach with lambda expression ---------------------------------------------------------------------
+
+Lambda expression can be used to shorten the code as follows when we work with functiona interfaces
+as shown bellow (Only one abstract method available interfaces)
+
+```
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List:
+
+public class BookService(){
+
+    public List<Book> getBooksinSort(){
+        List<Book> books = new BookDAO().getBooks();
+
+        Collections.sort(books, (o1,o2) -> o2.getName().compareTo(o1.getName()));
+        return books;
+
+    }
+
+
+public static void main(String[] args ){
+    System.out.println(new BookService().getBooksinSort());
+}
+
+
+}
+
+
+```
+
+
+
+
+
+
+## 8. Reffernce.
 
 Always reffer  Java Design document, ISD and FRS before you start the work.
 
 
-## 7. Your own time planner
+## 9. Your own time planner
 
 Have a own planner .  Other wise we will miss our important tasks and we dont have any understanding on our effort. Allocate at least 1h for learning process.
 
