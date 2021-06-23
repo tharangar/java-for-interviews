@@ -59,6 +59,22 @@ companyId : nable
 
 ```json
 
+tags to be used
+
+```
+    normal codes
+```
+
+```json
+    json payloads
+
+```
+
+```xml
+    xml payloads
+```
+
+
 {
      
       "groupName": "DEV11",
@@ -111,7 +127,24 @@ Response :
 ## 3. Loggin configuration
 
 Place following log configuraiton in  the resource folder for each service in logback-spring.xml  file
+Required dependencies
 
+```json
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<!--  Add slf4j with logback. exclution should be commented from spring-boot-starter -->
+		<dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+```
+configuration
 
 ```xml
 
