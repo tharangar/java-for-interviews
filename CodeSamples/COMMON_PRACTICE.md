@@ -857,6 +857,172 @@ public static void main(String[] args ){
 ```
 
 
+## 10.  Predicates
+
+Predicate is a interface present in Java.util.function package.
+A predicate contains a function with a single arguemnt and returns boolean value. (Predicate have boolean vlaue function).
+
+```
+interface Predicate<T>
+{
+    public boolean test(T t);
+}
+
+```
+
+Ex : 
+Write a predicate to check whether the given integer is greater than 50 or not.
+Write a predicate to check whether the length of given string is greater than 5 or not.
+
+```
+
+interface Predicate<T>
+{
+    public boolean test(T t);
+}
+
+public class Test {
+
+    public static void main(String[] args){
+
+        Predicate<Integer> p=I->I>50;
+        Predicate<String> p1=s->s.length()>5;
+        System.out.println(p.test(100));
+        System.out.println(p1.test("Ashwini'));
+    }
+}
+
+Result :
+
+true
+true
+
+
+
+```
+
+Predicate joining
+
+We can join two or more predicate by using following methods.
+1. 
+
+
+```
+
+psvm {
+
+    int x[]={1,2,3,4,5,6};
+    // Get even number
+    Predicate<Integer> P1=I->I%2==0;
+
+    //
+    Predicate<Integer> P2=I->I>2;
+
+    System.out.println("Print all even numbers :");
+    m1(p1,x);
+
+    System.out.println("Print all greater than 2 :");
+    m1(p2.x);
+
+    System.out.println("Print all greater than 2 and even : ");
+    m1(p2.and(p1),x);
+
+    System.out.println("Print all odd numbers : ");
+    m1(p1.negate(),x);
+
+    System.out.println('Print all greater than 2 or even : ");
+    m1(p2.or(p1),x);
+
+
+}
+
+
+public static void m1(Predicate<Integer> p, int []x){
+
+    for(int i:x){
+        if(p.test(i)){
+            System.out.println(i);
+        }
+    }
+
+}
+
+
+interface Predicate<T>
+{
+    public boolean test(T t);
+}
+
+```
+
+
+
+
+###  Get distinct record from a list using lambda expression, comparator and predicates
+
+https://howtodoinjava.com/java8/java-stream-distinct-examples/
+
+```
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+ 
+public class JavaStreamDistinctExamples 
+{
+    public static void main(String[] args) 
+    {
+        Person lokesh = new Person(1, "Lokesh", "Gupta");
+        Person brian = new Person(2, "Brian", "Clooney");
+        Person alex = new Person(3, "Alex", "Kolen");
+         
+        //Add some random persons
+        Collection<Person> list = Arrays.asList(lokesh,brian,alex,lokesh,brian,lokesh);
+ 
+        // Get distinct objects by key
+        List<Person> distinctElements = list.stream()
+                    .filter( distinctByKey(p -> p.getId()) )
+                    .collect( Collectors.toList() );
+ 
+        // Let's verify distinct elements
+        System.out.println( distinctElements );
+    }
+ 
+        //Utility function
+    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) 
+    {
+        Map<Object, Boolean> map = new ConcurrentHashMap<>();
+        return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    }
+}
+ 
+//Model class
+class Person 
+{
+    public Person(Integer id, String fname, String lname) {
+        super();
+        this.id = id;
+        this.fname = fname;
+        this.lname = lname;
+    }
+ 
+    private Integer id;
+    private String fname;
+    private String lname;
+ 
+    //Getters and Setters
+ 
+    @Override
+    public String toString() {
+        return "Person [id=" + id + ", fname=" + fname + ", lname=" + lname + "]";
+    }
+}
+```
 
 
 
