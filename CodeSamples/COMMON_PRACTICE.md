@@ -404,24 +404,36 @@ current object : null for new request. but if it is a new_request modificaiton b
 
 modified object : only requried parameters should be exposed through ESB. ( Audit details not shown under modified object even though audit details are added to the payload before save. )
 
-audit details : To be taken from modified object.
+audit details : To be taken from modified object in ESB .
 
 
 #### MODIFY_PENDING, DELETE_PENDING
 
 current object : currently active object in master tables
 
-modified object : submited changes by user . ( Do not expose audit details through ESB even though those are updated in the payload)
+modified object : submited changes by user . ( Do not expose audit details through ESB even though those are updated in the modified payload)
 
-audit details :  In ESB audit details of modified object should be exposed .
+audit details :  In ESB audit details of modified object should be exposed in this section. .
 
+
+### GET APIs.
+
+Other normal get APIs will provide only active object or deleted object.  New Pending  - > Rejected data should be removed from master data hence can not be shown in this API. (Enterer view will provided rejected New pending requests due to data will be taken from temp table).
 
 
 ### Entere view
 
-Enterer view is provided to request submitted users to view submitted requests. It should have the changes he requested clearly along with audit details.
+Enterer view is provided to request submitted users to view submitted requests. It should have the changes he requested clearly .
 
-It also should have current and modified object as we considered in auth pending. Further it should have a parameter to retrive audit details from audit trail.
+It also should have current and modified object as we considered in auth pending. Further it should have a parameter to retrive audit details from audit trail. (Ex, workflow ID and approval Id).
+
+Workflow and Approval modules have provided common APIs to get Audit details from workflowId and approvalId.
+
+Hence enterers can view Rejected requests from Enterer APIs.
+
+
+
+
 
 ## 8. Using lombok.
 
@@ -448,53 +460,53 @@ In such cases we have to override toStirng in such cases.
 Suppose you need to change this method to lambda expressin
 
  ```
- public void m1(){
-     sop("Hello");
- }
+    public void m1(){
+        sop("Hello");
+    }
 
 ```
 Lambda expression are annonimus ( no name), no return type , no modified.
 
-() -> {
-    sop("Hello);
-}
+    () -> {
+        sop("Hello);
+    }
 
 
 or  
 
-() - > sop("Hellow");
+    () - > sop("Hellow");
 
 EX  :2
 
 ```
-public void sum(int a, int b){
-    sop(a+b);
-}
+    public void sum(int a, int b){
+        sop(a+b);
+    }
 ```
 
-(int a, int b) -> {sop(a+b);}
+    (int a, int b) -> {sop(a+b);}
 
 OR
 
 input types will be automatically set by the compiler
 
-(a, b ) - > sop(a+b);
+    (a, b ) - > sop(a+b);
 
 Ex : 3
 
 ```
-public int m1(String s){
-    return  s.length();
-}
+    public int m1(String s){
+        return  s.length();
+    }
 ```
 
-(String s) -> {return s.length();}
+    (String s) -> {return s.length();}
 
 Defferent ways to optimize lambda expressions
 
 if we have only single line we can represt it as follows with input type removal and when only one input available.
 
-s - > s.length();
+    s - > s.length();
 
 
 
@@ -857,7 +869,7 @@ public static void main(String[] args ){
 ```
 
 
-## 10.  Predicates
+5.  Predicates
 
 Predicate is a interface present in Java.util.function package.
 A predicate contains a function with a single arguemnt and returns boolean value. (Predicate have boolean vlaue function).
@@ -1025,14 +1037,43 @@ class Person
 ```
 
 
+6. Stream API
+
+Java collection is a built in API for common data structures.
+When we want to process object from the collection then we should go for stream.
+Stream is a interface, present in java.util. stream
+
+1. We got stream by incode stream() on top of collection object.
+
+2. We can process a object in 2 ways.
+
+    1. Congiguration
 
 
-## 8. Reffernce.
+
+## 11. Get the latest branch for development and check with commited user and understandable branch name.
+
+
+
+
+
+## 12. Reffernce.
 
 Always reffer  Java Design document, ISD and FRS before you start the work.
 
 
-## 9. Your own time planner
+## 13. Technical Writting
+
+https://developers.google.com/tech-writing/overview
+
+Samitha provided sample
+
+
+## 14. monitory system development number types
+
+
+
+## 15. Your own time planner
 
 Have a own planner .  Other wise we will miss our important tasks and we dont have any understanding on our effort. Allocate at least 1h for learning process.
 
