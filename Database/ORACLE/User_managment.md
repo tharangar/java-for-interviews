@@ -130,3 +130,27 @@ https://docs.oracle.com/cd/B19306_01/network.102/b14266/authoriz.htm#i1008223
 How to create a profile and assign to a user.
 
 ![Resource managment](oracle2.PNG?raw=true "ORACLE Password managment")
+
+
+
+## Practivall sessions
+
+https://blogs.oracle.com/sql/how-to-create-users-grant-them-privileges-and-remove-them-in-oracle-database
+
+
+
+## Working with Restfull service.
+
+https://docs.oracle.com/en/database/oracle/oracle-database/19/dbrst/index.html
+
+
+## Getting started with Restful service
+
+https://docs.oracle.com/cd/E56351_01/doc.30/e87809/getting-started-with-RESTful-services.htm#AELIG-GUID-4F651A96-1E4F-4048-AE70-3136AC2A409A
+
+
+## ORDS (Oracle REST Data Service)
+
+https://oracle-base.com/articles/misc/oracle-rest-data-services-ords-create-basic-rest-web-services-using-plsql#create-test-db-user
+
+
